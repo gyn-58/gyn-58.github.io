@@ -679,7 +679,7 @@
           iconEls.forEach((item, index) => {
             item.href = icons[index]
           })
-          document.title = window.ASYNC_CONFIG.favicon.showText + window.originTitle;
+          document.title = window.ASYNC_CONFIG.favicon.showText + " " + window.originTitle;
           titleTime = setTimeout(function () {
             document.title = window.originTitle;
           }, 2000);

@@ -14,13 +14,14 @@
 <meta property="og:site_name" content="Nong&#39;s Blog">
 <meta property="og:description" content="关于Hexo搭建博客（三） 有了前面两节的基础，现在应该可以正常使用博客并发布文章了，在Blog目录下执行： 1$ hexo new post &quot;test&quot; 即可生成一篇test.md文章，在Blog&#x2F;source&#x2F;_posts可以找到它。  Hexo创建的每一个.md文件，在头部会有一个Front-matter区域：Hexo可以创建三种类型的文件：文章（post），页面（pa">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://gyn-58.github.io/img/posts/2.png">
-<meta property="og:image" content="http://gyn-58.github.io/img/posts/3.png">
+<meta property="og:image" content="http://gyn-58.github.io/2022/05/12/Hexo-3/2.png">
+<meta property="og:image" content="http://gyn-58.github.io/2022/05/12/Hexo-3/3.png">
+<meta property="og:image" content="http://gyn-58.github.io/2022/05/12/Hexo-3/4.png">
 <meta property="article:published_time" content="2022-05-12T11:07:50.000Z">
-<meta property="article:modified_time" content="2023-01-05T12:14:03.218Z">
+<meta property="article:modified_time" content="2023-01-06T07:19:22.564Z">
 <meta property="article:author" content="Nong">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://gyn-58.github.io/img/posts/2.png">
+<meta name="twitter:image" content="http://gyn-58.github.io/2022/05/12/Hexo-3/2.png">
 
 
 <title >Hexo-3</title>
@@ -230,7 +231,7 @@
                     <!-- banner title -->
                     <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
-                            NEWS LETTER
+                            My Posts
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
                             Hexo-3
@@ -380,18 +381,37 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post &quot;test&quot;</span><br></pre></td></tr></table></figure>
 <p>即可生成一篇test.md文章，在<code>Blog/source/_posts</code>可以找到它。</p>
 </li>
-<li><p>Hexo创建的每一个.md文件，在头部会有一个<em><strong>Front-matter</strong></em>区域：<br><img src="/img/posts/2.png" loading="lazy"><br>Hexo可以创建三种类型的文件：文章（post），页面（page），草稿（draft）。它们的模版文件在第二节提到的<em><strong>scaffolds</strong></em>文件夹下。通过配置对应类型的模版文件，在以后新建对应类型文件的时候，文件的<em><strong>Front-matter</strong></em>区域会自动进行填充预设好的内容，比较方便。<br><em><strong>markdown</strong></em>语法推荐使用软件Typora进行编写，因为mac版本是需要收费的，所以只能通过魔法才能永久使用。</p>
+<li><p>Hexo创建的每一个.md文件，在头部会有一个<em><strong>Front-matter</strong></em>区域：<br><img src="2.png" alt="2" loading="lazy"><br>Hexo可以创建三种类型的文件：文章（post），页面（page），草稿（draft)。它们的模版文件在第二节提到的<em><strong>scaffolds</strong></em>文件夹下。通过配置对应类型的模版文件，在以后新建对应类型文件的时候，文件的<em><strong>Front-matter</strong></em>区域会自动进行填充预设好的内容，比较方便。<br><em><strong>markdown</strong></em>语法推荐使用软件Typora进行编写，因为mac版本是需要收费的，所以只能通过魔法才能永久使用。</p>
 </li>
-<li><p>作为一个合格( Cool )的博客，也出于博客的可读性考虑，必须要对文章设置分类，当然这里建议按大类进行划分，而具体的文章系列可以通过给文章命名来实现，这样在展示的时候也比较简洁。<br>安装Hexo分类插件：</p>
+<li><p>作为一个合格的博客，也出于博客的可读性考虑，必须要对文章设置分类，当然这里建议按大类进行划分，而具体的文章系列可以通过给文章命名来实现，这样在展示的时候也比较简洁。<br>安装Hexo分类插件：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-category</span><br></pre></td></tr></table></figure>
 <p>新建分类页面（page）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
 <p>修改 <code>source/categories/index.md</code> 的<em><strong>Front-matter</strong></em>区域：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2022-05-09 10:11:45</span><br><span class="line">layout: category</span><br></pre></td></tr></table></figure>
-<p>在<code>_config.yml</code>配置文件下修改分类属性：<br><img src="/img/posts/3.png" loading="lazy"><br>以后在文章的<em><strong>Front-matter</strong></em>区域只需要填写对应分类名即可对文章分类。</p>
+<p>在<code>_config.yml</code>配置文件下修改分类属性：<br><img src="3.png" alt="3" loading="lazy"><br>  以后在文章的<em><strong>Front-matter</strong></em>区域只需要填写对应分类名即可对文章分类。</p>
 </li>
-<li><p>关于文章的封面（cover）以及文章内的图片有必要说一下，因为之前也是踩了不少的坑。<br>首先文章的封面图是直接在文章的<em><strong>Front-matter</strong></em>区域设置的，注意图片路径默认是<code>主题文件夹下的source/img文件夹</code>，且为相对路径，所以为了方便使用，我在img文件夹下建立cover文件夹，使用的时候只需要：<code>/img/cover/xxx.jpg</code>即可。注意一定是主题文件夹，不要搞到Hexo的source里面去，因为在网页上显示博客用的是博客主题里面的文件.ejs，ejs引擎把数据渲染生成HTML，这些文件里面的数据路径一定是自己的source文件夹下的资源。<br>其次文章里面用到的图片，也是大费周折，之前经常会显示不出来，看网上好多小伙伴都有类似的问题，仔细想了一下这个问题应该是没有普适的解决方法，这与主题有关系，每个主题默认的路径不一样，跟cover的道理是一样的，图片必须放在默认路径文件夹下才会显示。<br>解决办法除了上面提到的把图片放到正确的位置以外，还有两个解决办法。一个是上链接，像PicGo这种图床软件把图片上传云端，拷贝链接进去，缺点很明显，网不好的时候图片还是出不来，另外部署云端像阿里云腾讯云这种还是不太方便的；另外一个解决办法，图片本质还是编码，通过python脚本把图片转成<code>base64</code>编码，直接搞编码进去，当然这个方法会影响文章的编写，因为编码非常长，而且每个图片都要转，不太方便。</p>
+<li><p>关于文章的封面（cover）以及文章内的图片有必要说一下，因为之前也是踩了不少的坑。</p>
 </li>
+</ul>
+<ol>
+<li><p>文章的封面图是直接在文章的<em><strong>Front-matter</strong></em>区域设置的，注意图片路径默认是<code>主题文件夹下的source/img文件夹</code>，且为相对路径，所以为了方便使用，我在img文件夹下建立cover文件夹，使用的时候只需要：<code>/img/cover/xxx.jpg</code>即可。注意一定是主题文件夹，不要搞到Hexo的source里面去，因为在网页上显示博客用的是博客主题里面的文件.ejs，ejs引擎把数据渲染生成HTML，这些文件里面的数据路径一定是自己的source文件夹下的资源。</p>
+</li>
+<li><p>文章里面用到的图片，也是大费周折，之前经常会显示不出来，看网上好多小伙伴都有类似的问题，仔细想了一下这个问题与Typora和Hexo两部分有关。<br>更改Hexo配置文件***_config.yml***文件里的post_asset_folder属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
+<p>这样当我们创建一个post时，在与它同级的目录下会自动创建一个与post同名的资源文件夹，用于存放该post用到的图片。<br>然后安装Hexo插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+<p>这里要注意，插件要更改一个地方才能使用，因为插件版本比Hexo版本老，会有bug。在博客根目录按以下路径找到<code>index.js</code>文件：<br><em><strong>node_modules –&gt; hexo-asset-image –&gt; index.js</strong></em><br>在第<em><strong>58</strong></em>行找到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(this).attr(&#x27;src&#x27;, config.root + link + src);</span><br></pre></td></tr></table></figure>
+<p>更改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(this).attr(&#x27;src&#x27;,src);</span><br></pre></td></tr></table></figure>
+<p>因为我是用Typora进行编辑的，所以还需要对Typora进行设置才能更方便地直接插入图片。找到Typora的偏好设置，按下面进行配置：</p>
+</li>
+</ol>
+<p><img src="4.png" alt="4" loading="lazy"></p>
+<p>这样当我们插入图片时，Typora会让我们选择插入的图片，选择后会自动把该图片复制到post的资源文件夹下，不需要自己进行操作，同时不开源代码模式进行编辑的话还可以显示图片预览，避免部署以后才发现图片显示不出来。</p>
+<ul>
+<li>OK，至此基本上已经大功告成了，总的来说Hexo真的是有很多细节比较麻烦，毕竟博客这种主观性比较强的东西每个人的想法都不太一样，很多问题并没有一个普适的方法解决，需要自己探索。另外前端的玩法五花八门，专业的朋友做起来会比较得心应手，不过作为一个记录学习过程和心得的地方，it’s enough，Hexo系列到这里就结束了，后续遇到问题再进行补充～</li>
 </ul>
 
 </article>
@@ -406,6 +426,36 @@
             <span data-number="02"></span>
         </h5>
     </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/01/06/RayTracing/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/ray.jpg">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%B1%95%E7%A4%BA%E5%8C%BA/">
+                    展示区
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/01/06/RayTracing/" class="trm-anima-link">
+                    基于光线追踪的软件渲染器
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/01/06</li>
+                <li>11:28</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
     
     
         <div class="col-lg-6">

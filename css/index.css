@@ -750,7 +750,6 @@ html.is-animating .trm-swup-animation {
     pointer-events: none;
     box-shadow: var(--top-bar-box-shadow, 0 2px 4px 0 rgba(0, 0, 0, 0.15));
     transform: translateY(20px);
-    transition: all 0.4s ease-in-out;
   }
   .trm-top-bar .container .trm-right-side.trm-active {
     opacity: 1;
@@ -2010,7 +2009,6 @@ blockquote:after {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.4s ease-in-out;
 }
 .trm-video .trm-play-button svg,
 .trm-video .trm-play-button i {
