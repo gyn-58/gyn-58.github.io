@@ -7,15 +7,15 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="关于Hexo搭建博客（一） 首先说说博客，之前对博客确实没有多少了解，创建它是因为突然发现在学习过程中很多东西比较容易忘记，尤其是在配置xxx时的各种操作点，时间一久就很容易对细节模糊，所以博客上的内容主要起到提纲挈领的作用，记录一些point和idea。其次的话，也不指望有很多人看我的blog吧，毕竟也没搞domain什么的哈哈哈，在需要show或者share的时候写一下也还ok。  再来谈谈H">
+<meta name="description" content="关于Hexo搭建博客（一）作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。1. Why HEXO ？ 现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。  对于我最">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo-1">
 <meta property="og:url" content="http://gyn-58.github.io/2022/05/10/Hexo-1/index.html">
 <meta property="og:site_name" content="Nong&#39;s Blog">
-<meta property="og:description" content="关于Hexo搭建博客（一） 首先说说博客，之前对博客确实没有多少了解，创建它是因为突然发现在学习过程中很多东西比较容易忘记，尤其是在配置xxx时的各种操作点，时间一久就很容易对细节模糊，所以博客上的内容主要起到提纲挈领的作用，记录一些point和idea。其次的话，也不指望有很多人看我的blog吧，毕竟也没搞domain什么的哈哈哈，在需要show或者share的时候写一下也还ok。  再来谈谈H">
+<meta property="og:description" content="关于Hexo搭建博客（一）作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。1. Why HEXO ？ 现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。  对于我最">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-10T01:29:07.000Z">
-<meta property="article:modified_time" content="2023-01-05T10:50:00.928Z">
+<meta property="article:modified_time" content="2023-01-10T09:07:12.176Z">
 <meta property="article:author" content="Nong">
 <meta name="twitter:card" content="summary">
 
@@ -372,13 +372,43 @@
 </div>
 <div class="trm-card ">
     <article class="trm-publication">
-    <h1 id="关于Hexo搭建博客（一）"><a href="#关于Hexo搭建博客（一）" class="headerlink" title="关于Hexo搭建博客（一）"></a>关于Hexo搭建博客（一）</h1><ul>
-<li><p>首先说说博客，之前对博客确实没有多少了解，创建它是因为突然发现在学习过程中很多东西比较容易忘记，尤其是在配置xxx时的各种操作点，时间一久就很容易对细节模糊，所以博客上的内容主要起到提纲挈领的作用，记录一些point和idea。其次的话，也不指望有很多人看我的blog吧，毕竟也没搞domain什么的哈哈哈，在需要show或者share的时候写一下也还ok。</p>
+    <h1 id="关于Hexo搭建博客（一）"><a href="#关于Hexo搭建博客（一）" class="headerlink" title="关于Hexo搭建博客（一）"></a>关于Hexo搭建博客（一）</h1><h3 id="作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。"><a href="#作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。" class="headerlink" title="作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。"></a>作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。</h3><h3 id="1-Why-HEXO-？"><a href="#1-Why-HEXO-？" class="headerlink" title="1. Why HEXO ？"></a>1. Why HEXO ？</h3><ul>
+<li><p>现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。</p>
 </li>
-<li><p>再来谈谈Hexo，它是一款基于Node. js的静态博客框架，github上创建一个<u>与用户同名</u>的仓库就可以直接部署上去。当然github本身是可以创建一个网页的，但实在太拉了，仅适用于一次性分享那种用途。部署到github仓库也没什么太难的点，根据邮箱git一个公钥出来粘到github设置里的SSH就可以了，之前也搞过，主要的坑是branch有main和master之分，好像最早的时候就是master，但是这个词中文翻译过来有“主人”的意思，说什么搞种族歧视balabala，后来又叫main，所以在blog根目录下有一个_config.yml是Hexo的配置文件，deploy的时候branch属性一定要选对分支。</p>
+<li><p>对于我最初创建博客的定位而言主要有以下几点：</p>
+<ul>
+<li>博客界面美观易用，可以自己DIY</li>
+<li>仅用于记录一些学习过程和心得体会</li>
+<li>成本低，部署容易，后期不需要太多精力去维护</li>
+</ul>
+<p> 基于这个定位，对比了几款比较热门的博客框架像<em><strong>WordPress</strong></em>，<em><strong>Hexo</strong></em>，<em><strong>Jekyll</strong></em>，<em><strong>HUGO</strong></em>等，我最终选择了<em><strong>HEXO</strong></em>。</p>
 </li>
-<li><p>Hexo这玩意说实话有点故意装比的味道，语法搞的很奇怪，尤其是对于空格的要求很严格：”属性名:空格+属性”，新手上路不太友好。虽然blog写文章支持markdown语法，但是它有很多主题模版，每个模版配置都不一样，clone下来需要狠狠折腾一番才有可能出效果，其次每个模版的语法都不一样，ejs，less等等各种格式文件，这玩意对前端要求很高。在傻瓜式建站满天飞的今天，Hexo，WordPress这种被称为程序员专属的框架，确实让人一言难尽，不过总的来说玩玩还是蛮有意思的，收获也很多。</p>
+<li><p>区分这几种博客框架，首先得区分静态网页和动态网页的区别：</p>
+<ul>
+<li>静态网页是标准的<code>HTML</code>文件，相比较于动态网页，它没有后台数据库，不能与用户进行交互，每个网页都是一个真实存放在服务器上的文件，由于其内容相对稳定，页面浏览速度更快，更容易被搜索引擎检索，成本较低，适合个人低成本、功能需求不多的情况下使用。</li>
+<li>动态网页通常是<code>.asp .jsp .php</code>类型的文件，当浏览器请求服务器的某个页面时，服务器根据当前时间、环境参数、数据库操作等动态的生成HTML页面，然后再发送给浏览器，网页生成是动态的，所以访问速度较慢。它的设计以数据库为基础可以存储更多的数据，降低后期维护的成本，同时便于实现各种功能需求，适合商用。</li>
+</ul>
 </li>
+<li><p>这里简单介绍一下上面提到的几个博客框架：</p>
+<ul>
+<li><em><strong>WordPress</strong></em>：基于PHP开发的动态博客框架，需要用户自己搭建服务器。</li>
+<li><em><strong>Jekyll</strong></em>：静态博客框架，需要<code>Ruby</code>、<code>RubyGems</code>、<code>Node.js</code>、<code>Python</code>环境。</li>
+<li><em><strong>HUGO</strong></em>：基于<code>Go</code>语言的静态网站生成器。</li>
+<li><em><strong>Hexo</strong></em>：基于<code>Node.js</code>的静态博客框架，下面会详细介绍。</li>
+</ul>
+</li>
+<li><p>博客想要一步到位很难，而且成本也不低，所以找准自己定位才是关键。当你选择了服务器的方式进行搭建，很多时候就会很尴尬：一年几百几千的服务器都租了，总得弄个哇塞点的域名吧，上xx云一看，好点的域名第一年显示几十，乍一看很便宜，等到你续费的时候直接给你干到几百，这时候你一咬牙，买！买了以后还要备案，搞SSL证书告诉别人这网站不是以小博大紧张刺激的乐园而是你的博客。折腾这么一圈，终于可以写博客了吧，还不行，像WordPress这种基于PHP开发的动态博客框架，得在服务器上配置一大堆环境像LNMP（Linux+Nginx+MySQL+PHP）&#x2F;LAMP（Apache），就算用宝塔面板，不熟悉PHP没几天根本搞不定。经过无数次尝试，你的博客终于搭建好了，但是你已经精疲力尽，丝毫没有写博客的欲望了，硬着头皮写了一篇，发现网站又404了，于是你开始看服务器日志，找帖子解决……以上这些过程当然也可以采用Docker进行安装便于后期自动化部署，但是总体来说太过复杂且完全不能专注于内容创作。</p>
+</li>
+<li><p><em><strong>HEXO</strong></em>是一款基于<code>Node.js</code>开发的快速、简洁且高效的静态博客框架，它天然可以部署到github page上，通过<code>https://username.github.io</code>的方式可以直接进行访问（默认支持SSL），而且由于是静态网页，加载速度很快，同时还有丰富的主题可供选择，用户数量也多，所以<em><strong>HEXO</strong></em>可以说是搭建个人博客的首选。</p>
+</li>
+</ul>
+<h3 id="2-Working-Principle"><a href="#2-Working-Principle" class="headerlink" title="2. Working Principle"></a>2. Working Principle</h3><ul>
+<li>要了解Hexo的原理，首先得了解一下它的文件结构，即博客文件夹的结构：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line"> ├── _config.yml   # 整个博客的配置文件。</span><br><span class="line"> ├── node_modules  # 依赖包,安装的插件以及Hexo所需的Node.js模块。</span><br><span class="line"> ├── scaffolds # 模板文件夹,新建文章时根据对应模版类型生成文件。</span><br><span class="line"> ├── source  # 资源文件夹，存放博客资源。</span><br><span class="line"> |   └── _posts # 博客文章目录。</span><br><span class="line"> └── themes # 主题文件夹，Hexo根据主题生成静态页面。</span><br><span class="line"> ├── public  # 最终得到的网页内容。</span><br><span class="line"> ├── db.json # source解析所得到的缓存文件。</span><br><span class="line"> ├── package.json  # 应用程序信息，Hexo运行需要的js包。</span><br><span class="line"> </span><br></pre></td></tr></table></figure></li>
+<li>Hexo博客文章的编写支持<code>markdown</code>语法，简单易用，不需要过多关注文章的排版格式，文章是<code>.md</code>类型的文件。</li>
+<li>Hexo的配置文件采用<code>yaml</code>语言编写，后缀为<code>.yml</code>，这种语言专门用来写配置文件，主题文件夹下也有一个<code>_config.yml</code>文件，是你使用该主题的配置文件。区别在于Hexo的配置文件是全局的，主要是站点的基本信息，文章的布局，写作的格式，部署到github上的参数等等，而主题的配置文件仅用于对该主题的一些界面及插件设置。</li>
+<li>当我们编写好博客文章以后，Hexo通过模版引擎进行渲染，模版引擎默认使用<code>ejs</code>编写（由使用的主题而定，还有<code>jade</code>，<code>swig</code>等），它是一种简单高效的模板语言，通过数据和模板，可以生成HTML页面。模版引擎的作用就是将界面与数据分离，将模板内容中指定的地方替换成数据，实现业务代码与逻辑代码分离。这里<em><strong>source</strong></em>文件夹就是数据，即博客的文章，<em><strong>theme</strong></em>文件夹就是界面，即博客的主题。</li>
+<li>当我们执行<code>hexo g</code>命令后，Hexo首先解析<code>.md</code>文件建立索引，然后根据<em><strong>theme&#x2F;layout</strong></em>的布局类型，通过模版引擎最终渲染为<code>html、css、js</code>等文件到<em><strong>public</strong></em>文件夹下，生成可供浏览器显示的静态文章。</li>
+<li>执行<code>hexo d</code>命令后，Hexo会把public文件夹的内容部署上去，如果使用github托管的话可以发现此时仓库里的文件就是public文件夹下的内容，并没有博客的源码。</li>
 </ul>
 
 </article>

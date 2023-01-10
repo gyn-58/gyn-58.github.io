@@ -7,18 +7,18 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="关于Hexo搭建博客（三） 有了前面两节的基础，现在应该可以正常使用博客并发布文章了，在Blog目录下执行： 1$ hexo new post &quot;test&quot; 即可生成一篇test.md文章，在Blog&#x2F;source&#x2F;_posts可以找到它。  Hexo创建的每一个.md文件，在头部会有一个Front-matter区域：Hexo可以创建三种类型的文件：文章（post），页面（pa">
+<meta name="description" content="关于Hexo搭建博客（三）这篇文章主要是关于博客文章的创作方面。 有了前面两节的基础，现在应该可以正常使用博客并发布文章了，在Blog目录下执行： 1$ hexo new post &quot;test&quot; 即可生成一篇test.md文章，在Blog&#x2F;source&#x2F;_posts可以找到它。  Hexo创建的每一个.md文件，在头部会有一个Front-matter区域：Hexo可以创建三种类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo-3">
 <meta property="og:url" content="http://gyn-58.github.io/2022/05/12/Hexo-3/index.html">
 <meta property="og:site_name" content="Nong&#39;s Blog">
-<meta property="og:description" content="关于Hexo搭建博客（三） 有了前面两节的基础，现在应该可以正常使用博客并发布文章了，在Blog目录下执行： 1$ hexo new post &quot;test&quot; 即可生成一篇test.md文章，在Blog&#x2F;source&#x2F;_posts可以找到它。  Hexo创建的每一个.md文件，在头部会有一个Front-matter区域：Hexo可以创建三种类型的文件：文章（post），页面（pa">
+<meta property="og:description" content="关于Hexo搭建博客（三）这篇文章主要是关于博客文章的创作方面。 有了前面两节的基础，现在应该可以正常使用博客并发布文章了，在Blog目录下执行： 1$ hexo new post &quot;test&quot; 即可生成一篇test.md文章，在Blog&#x2F;source&#x2F;_posts可以找到它。  Hexo创建的每一个.md文件，在头部会有一个Front-matter区域：Hexo可以创建三种类">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://gyn-58.github.io/2022/05/12/Hexo-3/2.png">
 <meta property="og:image" content="http://gyn-58.github.io/2022/05/12/Hexo-3/3.png">
 <meta property="og:image" content="http://gyn-58.github.io/2022/05/12/Hexo-3/4.png">
 <meta property="article:published_time" content="2022-05-12T11:07:50.000Z">
-<meta property="article:modified_time" content="2023-01-06T07:19:22.564Z">
+<meta property="article:modified_time" content="2023-01-10T09:54:23.003Z">
 <meta property="article:author" content="Nong">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://gyn-58.github.io/2022/05/12/Hexo-3/2.png">
@@ -376,12 +376,44 @@
 </div>
 <div class="trm-card ">
     <article class="trm-publication">
-    <h1 id="关于Hexo搭建博客（三）"><a href="#关于Hexo搭建博客（三）" class="headerlink" title="关于Hexo搭建博客（三）"></a>关于Hexo搭建博客（三）</h1><ul>
+    <h1 id="关于Hexo搭建博客（三）"><a href="#关于Hexo搭建博客（三）" class="headerlink" title="关于Hexo搭建博客（三）"></a>关于Hexo搭建博客（三）</h1><h3 id="这篇文章主要是关于博客文章的创作方面。"><a href="#这篇文章主要是关于博客文章的创作方面。" class="headerlink" title="这篇文章主要是关于博客文章的创作方面。"></a>这篇文章主要是关于博客文章的创作方面。</h3><ul>
 <li><p>有了前面两节的基础，现在应该可以正常使用博客并发布文章了，在Blog目录下执行：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post &quot;test&quot;</span><br></pre></td></tr></table></figure>
 <p>即可生成一篇test.md文章，在<code>Blog/source/_posts</code>可以找到它。</p>
 </li>
 <li><p>Hexo创建的每一个.md文件，在头部会有一个<em><strong>Front-matter</strong></em>区域：<br><img src="2.png" alt="2" loading="lazy"><br>Hexo可以创建三种类型的文件：文章（post），页面（page），草稿（draft)。它们的模版文件在第二节提到的<em><strong>scaffolds</strong></em>文件夹下。通过配置对应类型的模版文件，在以后新建对应类型文件的时候，文件的<em><strong>Front-matter</strong></em>区域会自动进行填充预设好的内容，比较方便。<br><em><strong>markdown</strong></em>语法推荐使用软件Typora进行编写，因为mac版本是需要收费的，所以只能通过魔法才能永久使用。</p>
+</li>
+<li><p>这里简单介绍下<em><strong>markdown</strong></em>的常用语法</p>
+<ul>
+<li><p>分级标题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题  </span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>字体：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">*斜体文字*</span><br><span class="line"></span><br><span class="line">_斜体文字_</span><br><span class="line"></span><br><span class="line">**粗体文字**</span><br><span class="line"></span><br><span class="line">__粗体文字__</span><br><span class="line"></span><br><span class="line">***粗斜体文字***</span><br><span class="line"></span><br><span class="line">___粗斜体文字___</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下划线、删除线：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;u&gt;带下划线文本&lt;/u&gt;</span><br><span class="line">～～带删除线文本～～</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有序列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 有序列表文字</span><br><span class="line">2. 有序列表文字</span><br><span class="line">3. 有序列表文字</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无序列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 无序列表文字</span><br><span class="line">* 无序列表文字</span><br><span class="line">* 无序列表文字</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`代码`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码块：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">代码块</span><br><span class="line"></span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>超链接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[链接名称](链接网址)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](图片路径)</span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
 <li><p>作为一个合格的博客，也出于博客的可读性考虑，必须要对文章设置分类，当然这里建议按大类进行划分，而具体的文章系列可以通过给文章命名来实现，这样在展示的时候也比较简洁。<br>安装Hexo分类插件：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-category</span><br></pre></td></tr></table></figure>
