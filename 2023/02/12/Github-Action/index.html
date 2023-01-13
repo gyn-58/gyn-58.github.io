@@ -7,20 +7,22 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="关于Hexo搭建博客（一）作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。1. Why HEXO ？ 现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。  对于我最">
+<meta name="description" content="Github Actions 自动化部署（一）这篇文章主要介绍 Github 自己的持续集成工具 Github Actions。1. DevOps 与 CI&#x2F;CD DevOps  DevOps 这个概念最早在大学的软件过程这门课中接触，当时觉得这种面向企业的软件开发管理模式离我们甚是遥远，没有实际操作仅仅是学一堆理论导致根本不了解它的好处到底在哪，正好借这次学习 CI&#x2F;CD 的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo-1">
-<meta property="og:url" content="http://gyn-58.github.io/2022/05/10/Hexo-1/index.html">
+<meta property="og:title" content="Github Actions (一)">
+<meta property="og:url" content="http://gyn-58.github.io/2023/02/12/Github-Action/index.html">
 <meta property="og:site_name" content="Nong&#39;s Blog">
-<meta property="og:description" content="关于Hexo搭建博客（一）作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。1. Why HEXO ？ 现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。  对于我最">
+<meta property="og:description" content="Github Actions 自动化部署（一）这篇文章主要介绍 Github 自己的持续集成工具 Github Actions。1. DevOps 与 CI&#x2F;CD DevOps  DevOps 这个概念最早在大学的软件过程这门课中接触，当时觉得这种面向企业的软件开发管理模式离我们甚是遥远，没有实际操作仅仅是学一堆理论导致根本不了解它的好处到底在哪，正好借这次学习 CI&#x2F;CD 的">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-10T01:29:07.000Z">
-<meta property="article:modified_time" content="2023-01-11T12:11:52.364Z">
+<meta property="og:image" content="http://gyn-58.github.io/2023/02/12/Github-Action/CI_CD.png">
+<meta property="article:published_time" content="2023-02-12T11:51:50.000Z">
+<meta property="article:modified_time" content="2023-01-13T01:44:28.356Z">
 <meta property="article:author" content="Nong">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gyn-58.github.io/2023/02/12/Github-Action/CI_CD.png">
 
 
-<title >Hexo-1</title>
+<title >Github Actions (一)</title>
 
 <!-- Favicon -->
 
@@ -228,7 +230,7 @@
                             My Posts
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            Hexo-1
+                            Github Actions (一)
                         </h1>
 
                         
@@ -238,7 +240,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        2022
+                                        2023
                                     </span
                                 ></li>
                             </ul>
@@ -271,13 +273,13 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            05/10
+            02/12
         </div>
     </div>
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-clock trm-icon"></i><br>
-            09:29
+            19:51
         </div>
     </div>
     <div class="col-sm-4">
@@ -289,43 +291,109 @@
 </div>
 <div class="trm-card ">
     <article class="trm-publication">
-    <h1 id="关于Hexo搭建博客（一）"><a href="#关于Hexo搭建博客（一）" class="headerlink" title="关于Hexo搭建博客（一）"></a>关于Hexo搭建博客（一）</h1><h3 id="作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。"><a href="#作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。" class="headerlink" title="作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。"></a>作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。</h3><h3 id="1-Why-HEXO-？"><a href="#1-Why-HEXO-？" class="headerlink" title="1. Why HEXO ？"></a>1. Why HEXO ？</h3><ul>
-<li><p>现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。</p>
-</li>
-<li><p>对于我最初创建博客的定位而言主要有以下几点：</p>
+    <h1 id="Github-Actions-自动化部署（一）"><a href="#Github-Actions-自动化部署（一）" class="headerlink" title="Github Actions 自动化部署（一）"></a>Github Actions 自动化部署（一）</h1><h3 id="这篇文章主要介绍-Github-自己的持续集成工具-Github-Actions。"><a href="#这篇文章主要介绍-Github-自己的持续集成工具-Github-Actions。" class="headerlink" title="这篇文章主要介绍 Github 自己的持续集成工具 Github Actions。"></a>这篇文章主要介绍 Github 自己的持续集成工具 Github Actions。</h3><h3 id="1-DevOps-与-CI-x2F-CD"><a href="#1-DevOps-与-CI-x2F-CD" class="headerlink" title="1. DevOps 与 CI&#x2F;CD"></a>1. DevOps 与 CI&#x2F;CD</h3><ul>
+<li><p><strong>DevOps</strong></p>
 <ul>
-<li>博客界面美观易用，可以自己DIY</li>
-<li>仅用于记录一些学习过程和心得体会</li>
-<li>成本低，部署容易，后期不需要太多精力去维护</li>
-</ul>
-<p> 基于这个定位，对比了几款比较热门的博客框架像<strong>WordPress</strong>，<strong>Hexo</strong>，<strong>Jekyll</strong>，<strong>HUGO</strong>等，我最终选择了<strong>HEXO</strong>。</p>
+<li><p>DevOps 这个概念最早在大学的软件过程这门课中接触，当时觉得这种面向企业的软件开发管理模式离我们甚是遥远，没有实际操作仅仅是学一堆理论导致根本不了解它的好处到底在哪，正好借这次学习 CI&#x2F;CD 的机会，再重新认识一下它。</p>
 </li>
-<li><p>区分这几种博客框架，首先得区分静态网页和动态网页的区别：</p>
+<li><p>DevOps 是 Development 和 Operations 的组合，是一组过程、方法与系统的统称。</p>
+</li>
+<li><p>产生的原因：软件行业日益清晰地认识到为了按时交付软件产品和服务，开发(Dev)和运维(Ops)必须紧密合作，在保证软件高质量的前提下<u>缩短系统变更从提交到部署至生产环境的时间</u>。</p>
+</li>
+<li><p>主要目的：最大程度减少跨团队协作（例如开发和运维），通过<u><strong>自动化</strong></u>来加速软件变更和部署的流程，以缩短推向市场的时间。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>CI&#x2F;CD</strong></p>
 <ul>
-<li>静态网页是标准的<code>HTML</code>文件，相比较于动态网页，它没有后台数据库，不能与用户进行交互，每个网页都是一个真实存放在服务器上的文件，由于其内容相对稳定，页面浏览速度更快，更容易被搜索引擎检索，成本较低，适合个人低成本、功能需求不多的情况下使用。</li>
-<li>动态网页通常是<code>.asp .jsp .php</code>类型的文件，当浏览器请求服务器的某个页面时，服务器根据当前时间、环境参数、数据库操作等动态的生成HTML页面，然后再发送给浏览器，网页生成是动态的，所以访问速度较慢。它的设计以数据库为基础可以存储更多的数据，降低后期维护的成本，同时便于实现各种功能需求，适合商用。</li>
-</ul>
+<li><p>CI&#x2F;CD 指的是持续集成(Continuous Integration)、持续交付(Continuous Delivery)、持续部署(Continuous Deployment)。</p>
 </li>
-<li><p>这里简单介绍一下上面提到的几个博客框架：</p>
+<li><p>很明显，CI&#x2F;CD 就是实现 DevOps 自动化的一种方法，它贯穿软件开发的集成和测试、交付、部署阶段，由开发和运维团队以敏捷方式协同支持，其实也是 DevOps 的产物。</p>
+</li>
+<li><p>CI–持续集成：频繁地将通过自动化测试的代码集成(Push)到主干。集成测试的过程是完全自动化的，由专门的集成服务器进行构建，这样可以及早发现代码的问题，及早解决，避免代码堆积。</p>
+</li>
+<li><p>CD–持续交付：建立一个可随时将开发环境的功能部署到生产环境的代码库。持续交付可以大大缩短软件开发周期，能够保证软件在任何时候都能可靠地发布出去。</p>
+</li>
+<li><p>CD–持续部署：自动地将软件部署到生产环境，使得开发人员对软件功能的修改可以及时生效，大大提高了运维人员的部署效率。</p>
+</li>
+<li><p>CI&#x2F;CD就是一整个自动化的流程，也叫管道(Pipeline)，用于实现应用开发中的高度持续自动化和持续监控。</p>
+</li>
+</ul>
+<p>  <img src="CI_CD.png" alt="CI:CD" loading="lazy"></p>
+</li>
+</ul>
+<h3 id="2-Github-Actions"><a href="#2-Github-Actions" class="headerlink" title="2. Github Actions"></a>2. Github Actions</h3><ul>
+<li><p>Github Actions 是 Github 开发的 CI&#x2F;CD 平台，在 2018 年推出，2019 年 11 月对所有用户全面开放。</p>
+</li>
+<li><p>上面提到 CI&#x2F;CD 自动化流程由很多操作组成，这些操作就是 Actions，而 Github Actions 有自己完整的一套术语：</p>
 <ul>
-<li><strong>WordPress</strong>：基于PHP开发的动态博客框架，需要用户自己搭建服务器。</li>
-<li><strong>Jekyll</strong>：静态博客框架，需要<code>Ruby</code>、<code>RubyGems</code>、<code>Node.js</code>、<code>Python</code>环境。</li>
-<li><strong>HUGO</strong>：基于<code>Go</code>语言的静态网站生成器。</li>
-<li><strong>Hexo</strong>：基于<code>Node.js</code>的静态博客框架，下面会详细介绍。</li>
-</ul>
+<li><p>workflow：一个完整的工作流程，包含多个任务(jobs)。</p>
 </li>
-<li><p>博客想要一步到位很难，而且成本也不低，所以找准自己定位才是关键。当你选择了服务器的方式进行搭建，很多时候就会很尴尬：一年几百几千的服务器都租了，总得弄个哇塞点的域名吧，上xx云一看，好点的域名第一年显示几十，乍一看很便宜，等到你续费的时候直接给你干到几百，这时候你一咬牙，买！买了以后还要备案，搞SSL证书告诉别人这网站不是以小博大紧张刺激的乐园而是你的博客。折腾这么一圈，终于可以写博客了吧，还不行，像WordPress这种基于PHP开发的动态博客框架，得在服务器上配置一大堆环境像LNMP（Linux+Nginx+MySQL+PHP）&#x2F; LAMP（Apache），就算用宝塔面板，不熟悉PHP没几天根本搞不定。经过无数次尝试，你的博客终于搭建好了，但是你已经精疲力尽，丝毫没有写博客的欲望了，硬着头皮写了一篇，发现网站又404了，于是你开始看服务器日志，找帖子解决……以上这些过程当然也可以采用Docker进行安装便于后期自动化部署，但是总体来说太过复杂且完全不能专注于内容创作。</p>
+<li><p>job：任务，jobs 包含一个或多个 job，每个 job 由一系列的步骤(steps)组成。</p>
 </li>
-<li><p><strong>HEXO</strong>是一款基于<code>Node.js</code>开发的快速、简洁且高效的静态博客框架，它天然可以部署到github page上，通过<code>https://username.github.io</code>的方式可以直接进行访问（默认支持SSL），而且由于是静态网页，加载速度很快，同时还有丰富的主题可供选择，用户数量也多，所以<em><strong>HEXO</strong></em>可以说是搭建个人博客的首选。</p>
+<li><p>step：步骤，每个步骤可以执行一个或多个动作(action)。</p>
+</li>
+<li><p>action：每个 action 就是最基本的动作单元。</p>
 </li>
 </ul>
-<h3 id="2-Working-Principle"><a href="#2-Working-Principle" class="headerlink" title="2. Working Principle"></a>2. Working Principle</h3><ul>
-<li>要了解Hexo的原理，首先得了解一下它的文件结构，即博客文件夹的结构：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line"> ├── _config.yml   # 整个博客的配置文件。</span><br><span class="line"> ├── node_modules  # 依赖包,安装的插件以及Hexo所需的Node.js模块。</span><br><span class="line"> ├── scaffolds # 模板文件夹,新建文章时根据对应模版类型生成文件。</span><br><span class="line"> ├── source  # 资源文件夹，存放博客资源。</span><br><span class="line"> |   └── _posts # 博客文章目录。</span><br><span class="line"> └── themes # 主题文件夹，Hexo根据主题生成静态页面。</span><br><span class="line"> ├── public  # 最终得到的网页内容。</span><br><span class="line"> ├── db.json # source解析所得到的缓存文件。</span><br><span class="line"> ├── package.json  # 应用程序信息，Hexo运行需要的js包。</span><br><span class="line"> </span><br></pre></td></tr></table></figure></li>
-<li>Hexo博客文章的编写支持<code>markdown</code>语法，简单易用，不需要过多关注文章的排版格式，文章是<code>.md</code>类型的文件。</li>
-<li>Hexo的配置文件采用<code>yaml</code>语言编写，后缀为<code>.yml</code>，这种语言专门用来写配置文件，主题文件夹下也有一个<code>_config.yml</code>文件，是你使用该主题的配置文件。区别在于Hexo的配置文件是全局的，主要是站点的基本信息，文章的布局，写作的格式，部署到github上的参数等等，而主题的配置文件仅用于对该主题的一些界面及插件设置。</li>
-<li>当我们编写好博客文章以后，Hexo通过模版引擎进行渲染，模版引擎默认使用<code>ejs</code>编写（由使用的主题而定，还有<code>jade</code>，<code>swig</code>等），它是一种简单高效的模板语言，通过数据和模板，可以生成HTML页面。模版引擎的作用就是将界面与数据分离，将模板内容中指定的地方替换成数据，实现业务代码与逻辑代码分离。这里<em><strong>source</strong></em>文件夹就是数据，即博客的文章，<em><strong>theme</strong></em>文件夹就是界面，即博客的主题。</li>
-<li>当我们执行<code>hexo g</code>命令后，Hexo首先解析<code>.md</code>文件建立索引，然后根据<em><strong>theme&#x2F;layout</strong></em>的布局类型，通过模版引擎最终渲染为<code>html、css、js</code>等文件到<em><strong>public</strong></em>文件夹下，生成可供浏览器显示的静态文章。</li>
-<li>执行<code>hexo d</code>命令后，Hexo会把public文件夹的内容部署上去，如果使用github托管的话可以发现此时仓库里的文件就是public文件夹下的内容，并没有博客的源码。</li>
+</li>
+<li><p>Github Actions 的整个流程由很多个基本动作 action 组成，每个 action 都是一个脚本，Github 提供了一个<a target="_blank" rel="noopener" href="https://github.com/marketplace?type=actions">action 商店</a>，里面有各种各样的 action。很多动作可以直接通过<code>actions/action_name</code>的方式直接引用它而不必自己编写，大大节省了时间。比如安装 Node.js 就可以直接通过<code>actions/setup-node</code>实现。</p>
+</li>
+<li><p>Github 提供了 Linux、Windows 和 macOS 环境来运行整个 CI&#x2F;CD 流程，普通用户每个月可以享受 500MB 的免费存储以及 2000 分钟数的运行时间，但是存储空间使用量不会重置，且在 GitHub 主机的 Windows 和 macOS 运行器上运行的作业，其消耗分钟数是在 Linux 运行器上运行的作业的 2 倍和 10 倍。例如，1000 分钟的 Windows 使用时间将占用帐户中包含的 2000 分钟，1000 分钟的 macOS 使用时间将占用帐户中包含的 10000 分钟。</p>
+</li>
+<li><p>Github Actions 的配置文件称为 workflow 文件，存放在仓库的<code>.github/workflows</code>目录，采用之前提到过的<code>yaml</code>格式编写，它的一些基本字段如下：</p>
+<ul>
+<li><p>name：workflow 的名称，默认为当前 workflow 配置文件名。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name: Github Actions</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>on：指定触发 workflow 的条件，通常是某些事件，例如当 push 代码到仓库时触发该自动化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">on: push</span><br></pre></td></tr></table></figure>
+
+<p>也可以指定仓库的具体分支，例如 push 代码到仓库的 main 分支时才会触发：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">on: </span><br><span class="line">  push:</span><br><span class="line">    branches:</span><br><span class="line">      - main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>jobs：表示要执行的一项或多项任务。如无特殊指定，job 之间是并发执行的，可以通过 needs 控制它们的执行顺序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jobs:</span><br><span class="line">  job1:</span><br><span class="line">    ···</span><br><span class="line">    </span><br><span class="line">  job2:</span><br><span class="line">    needs: job1</span><br><span class="line">    </span><br><span class="line">  job3:</span><br><span class="line">    needs: [job1, job2]</span><br></pre></td></tr></table></figure>
+
+<p>上面定义的任务执行顺序为<code>job1 --&gt; job2 --&gt; job3</code>。</p>
+</li>
+<li><p>job –&gt; runs-on：指定任务运行的虚拟机环境，目前可用的虚拟机环境如下：</p>
+<ul>
+<li><p>ubuntu-latest，ubuntu-18.04或ubuntu-16.04</p>
+</li>
+<li><p>windows-latest，windows-2019或windows-2016</p>
+</li>
+<li><p>macOS-latest或macOS-10.14</p>
+</li>
+</ul>
+<p>通常 Github 会提供 2 核处理器、7 GB内存和 14 GB固态硬盘的 runner。</p>
+</li>
+<li><p>env：可以给任务(jobs)或步骤(steps)配置环境变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">env: </span><br><span class="line">  name: &quot;gyn&quot;</span><br><span class="line">run: |</span><br><span class="line">  echo $name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>steps：指定每个 job 的运行步骤，每个 job 包含多个 step，从上到下依次执行。每个 step 包含以下字段：</p>
+<ul>
+<li><p>name：步骤的名称。</p>
+</li>
+<li><p>env：该步骤所需的环境变量。</p>
+</li>
+<li><p>id：每个步骤的标识符。</p>
+</li>
+<li><p>uses：步骤使用的 action。</p>
+</li>
+<li><p>with：指定 action 所需参数。例如安装 Node.js：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- name: Setup Node</span><br><span class="line">  uses: actions/setup-node@v1</span><br><span class="line">  with:</span><br><span class="line">    node-version: [16.x]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>run：具体执行哪些指令。</p>
+</li>
+<li><p>continue-on-error：设置为 true 时当此步骤失败仍允许 job 通过。</p>
+</li>
+<li><p>timeout-minutes：设置 step 的超时时间。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 </article>
@@ -343,10 +411,10 @@
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
-        <a href="/2022/05/10/Hexo-2/" class="trm-cover-frame trm-anima-link">
+        <a href="/2023/02/13/Github-Aciton-2/" class="trm-cover-frame trm-anima-link">
             
             
-                <img alt="cover" src="/img/cover/1.jpg">
+                <img alt="cover" src="/img/cover/actions.png">
             
         </a>
         <div class="trm-card-descr">
@@ -356,14 +424,14 @@
                 </a>
             </div>
             <h5>
-                <a href="/2022/05/10/Hexo-2/" class="trm-anima-link">
-                    Hexo-2
+                <a href="/2023/02/13/Github-Aciton-2/" class="trm-anima-link">
+                    Github Acitons (二)
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
             <ul class="trm-card-data trm-label">
-                <li>22/05/10</li>
-                <li>20:17</li>
+                <li>23/02/13</li>
+                <li>09:42</li>
                 
                 
             </ul>
@@ -371,6 +439,36 @@
     </div>
 </div>
     
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/01/18/Docker/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/Docker_logo.jpeg">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%9B%E4%BD%9C%E5%8C%BA/">
+                    创作区
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/01/18/Docker/" class="trm-anima-link">
+                    Docker
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/01/18</li>
+                <li>11:12</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
     
 </div>
 

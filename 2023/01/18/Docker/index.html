@@ -7,20 +7,25 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="关于Hexo搭建博客（一）作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。1. Why HEXO ？ 现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。  对于我最">
+<meta name="description" content="Docker入门这篇文章主要介绍Docker的相关概念以及它的一些特点。1. Containers–容器 虚拟化技术VT (Visualization Technology)  虚拟化技术本质上来讲就是可以让一个CPU工作起来就像多个CPU并行运行，从而使得在一台电脑内可以同时运行多个操作系统，也就是常说的虚拟机(Visual Machine)。它的核心技术hypervisor也叫虚拟机监视器(V">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo-1">
-<meta property="og:url" content="http://gyn-58.github.io/2022/05/10/Hexo-1/index.html">
+<meta property="og:title" content="Docker">
+<meta property="og:url" content="http://gyn-58.github.io/2023/01/18/Docker/index.html">
 <meta property="og:site_name" content="Nong&#39;s Blog">
-<meta property="og:description" content="关于Hexo搭建博客（一）作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。1. Why HEXO ？ 现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。  对于我最">
+<meta property="og:description" content="Docker入门这篇文章主要介绍Docker的相关概念以及它的一些特点。1. Containers–容器 虚拟化技术VT (Visualization Technology)  虚拟化技术本质上来讲就是可以让一个CPU工作起来就像多个CPU并行运行，从而使得在一台电脑内可以同时运行多个操作系统，也就是常说的虚拟机(Visual Machine)。它的核心技术hypervisor也叫虚拟机监视器(V">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-10T01:29:07.000Z">
-<meta property="article:modified_time" content="2023-01-11T12:11:52.364Z">
+<meta property="og:image" content="http://gyn-58.github.io/2023/01/18/Docker/vm_container.jpg">
+<meta property="og:image" content="http://gyn-58.github.io/2023/01/18/Docker/docker-container.png">
+<meta property="og:image" content="http://gyn-58.github.io/2023/01/18/Docker/file.png">
+<meta property="og:image" content="http://gyn-58.github.io/2023/01/18/Docker/file2.png">
+<meta property="article:published_time" content="2023-01-18T03:12:05.000Z">
+<meta property="article:modified_time" content="2023-01-11T12:05:26.822Z">
 <meta property="article:author" content="Nong">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gyn-58.github.io/2023/01/18/Docker/vm_container.jpg">
 
 
-<title >Hexo-1</title>
+<title >Docker</title>
 
 <!-- Favicon -->
 
@@ -211,7 +216,7 @@
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
     
     <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.jpeg">
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/Docker.png">
     <!-- banner cover end -->
     
 
@@ -225,10 +230,10 @@
                     <!-- banner title -->
                     <div class="trm-banner-text trm-text-center ">
                         <div class="trm-label trm-mb-20">
-                            My Posts
+                            
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            Hexo-1
+                            Docker
                         </h1>
 
                         
@@ -238,7 +243,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        2022
+                                        2023
                                     </span
                                 ></li>
                             </ul>
@@ -271,13 +276,13 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            05/10
+            01/18
         </div>
     </div>
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-clock trm-icon"></i><br>
-            09:29
+            11:12
         </div>
     </div>
     <div class="col-sm-4">
@@ -289,43 +294,70 @@
 </div>
 <div class="trm-card ">
     <article class="trm-publication">
-    <h1 id="关于Hexo搭建博客（一）"><a href="#关于Hexo搭建博客（一）" class="headerlink" title="关于Hexo搭建博客（一）"></a>关于Hexo搭建博客（一）</h1><h3 id="作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。"><a href="#作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。" class="headerlink" title="作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。"></a>作为第一篇博客，简单谈谈创建博客过程中的一些心得体会。</h3><h3 id="1-Why-HEXO-？"><a href="#1-Why-HEXO-？" class="headerlink" title="1. Why HEXO ？"></a>1. Why HEXO ？</h3><ul>
-<li><p>现在市面上现成的可以写博客的平台有很多，像CSDN、博客园、简书等，优点是可以直接在上面发表，用户无需花费很多精力去折腾，写的文章百度也能搜到，当然缺点也很明显：毕竟依托平台，自由度会受到限制，很多想法并不好实现，同时各种广告导致博客环境并不好，所以并不适用于长期使用的个人博客。</p>
-</li>
-<li><p>对于我最初创建博客的定位而言主要有以下几点：</p>
+    <h1 id="Docker入门"><a href="#Docker入门" class="headerlink" title="Docker入门"></a>Docker入门</h1><h3 id="这篇文章主要介绍Docker的相关概念以及它的一些特点。"><a href="#这篇文章主要介绍Docker的相关概念以及它的一些特点。" class="headerlink" title="这篇文章主要介绍Docker的相关概念以及它的一些特点。"></a>这篇文章主要介绍Docker的相关概念以及它的一些特点。</h3><h3 id="1-Containers–容器"><a href="#1-Containers–容器" class="headerlink" title="1. Containers–容器"></a>1. Containers–容器</h3><ul>
+<li><p><strong>虚拟化技术VT (Visualization Technology)</strong></p>
 <ul>
-<li>博客界面美观易用，可以自己DIY</li>
-<li>仅用于记录一些学习过程和心得体会</li>
-<li>成本低，部署容易，后期不需要太多精力去维护</li>
-</ul>
-<p> 基于这个定位，对比了几款比较热门的博客框架像<strong>WordPress</strong>，<strong>Hexo</strong>，<strong>Jekyll</strong>，<strong>HUGO</strong>等，我最终选择了<strong>HEXO</strong>。</p>
+<li><p>虚拟化技术本质上来讲就是可以让一个CPU工作起来就像多个CPU并行运行，从而使得在一台电脑内可以同时运行多个操作系统，也就是常说的虚拟机(Visual Machine)。它的核心技术<strong>hypervisor</strong>也叫虚拟机监视器(Visual Machine Monitor，VMM)，是一种运行在基础物理服务器和操作系统之间的中间软件层，可以将一台或多台独立的机器虚拟运行于硬件之上，当服务器启动并执行hypervisor时，它会加载所有虚拟机客户端的操作系统同时分配给每一台虚拟机适量的内存，CPU，网络和磁盘。</p>
 </li>
-<li><p>区分这几种博客框架，首先得区分静态网页和动态网页的区别：</p>
+<li><p>用来运行这些虚拟操作系统的电脑叫主体机器(host machine)，而这些虚拟出来的操作系统叫客体操作系统(guest os)，hypervisor提供虚拟的作业平台来执行客体操作系统，这些客体操作系统，共同分享虚拟化后的硬件资源，如下图所示：</p>
+<p><img src="vm_container.jpg" alt="vm_container" loading="lazy"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>容器 (Containers)</strong></p>
 <ul>
-<li>静态网页是标准的<code>HTML</code>文件，相比较于动态网页，它没有后台数据库，不能与用户进行交互，每个网页都是一个真实存放在服务器上的文件，由于其内容相对稳定，页面浏览速度更快，更容易被搜索引擎检索，成本较低，适合个人低成本、功能需求不多的情况下使用。</li>
-<li>动态网页通常是<code>.asp .jsp .php</code>类型的文件，当浏览器请求服务器的某个页面时，服务器根据当前时间、环境参数、数据库操作等动态的生成HTML页面，然后再发送给浏览器，网页生成是动态的，所以访问速度较慢。它的设计以数据库为基础可以存储更多的数据，降低后期维护的成本，同时便于实现各种功能需求，适合商用。</li>
+<li><p>容器与上面提到的管理程序虚拟化(Hypervisor Visualization，HV)有所不同，管理程序虚拟化通过hypervisor将一台或者多台独立的机器虚拟运行与物理硬件之上，而容器则是直接运行在操作系统内核之上的用户空间，因此容器虚拟化也被称为“操作系统级虚拟化”。</p>
+</li>
+<li><p>简单来说，容器是应用程序层的抽象，将代码和依赖项打包在一起。多个容器可以在同一台机器上运行，并与其他容器共享操作系统内核，每个容器都可以在用户空间中作为孤立的进程运行。容器占用的空间比虚拟机少很多（容器映像的大小通常为几十MB），可以处理更多的应用程序，并且需要更少的虚拟机和操作系统。</p>
+<p><img src="docker-container.png" alt="docker-container" loading="lazy"></p>
+</li>
 </ul>
 </li>
-<li><p>这里简单介绍一下上面提到的几个博客框架：</p>
+</ul>
+<h3 id="2-Docker"><a href="#2-Docker" class="headerlink" title="2. Docker"></a>2. Docker</h3><ul>
+<li><p><strong>Docker的前身LXC (Linux Container)</strong><br>LXC被称作Linux容器，可以提供轻量级的虚拟化。它将Linux沙盒化，使得进程之间相互隔离，并且能对各进程资源合理分配，是Docker最初的底层核心。</p>
+<blockquote>
+<p>沙盒(sandbox)：一种安全机制，为运行中的程序提供的隔离环境，当程序来源未知或可能造成破坏时可以保证电脑的安全，也常用于对程序的测试。</p>
+</blockquote>
+</li>
+<li><p><strong>什么是Docker?</strong></p>
 <ul>
-<li><strong>WordPress</strong>：基于PHP开发的动态博客框架，需要用户自己搭建服务器。</li>
-<li><strong>Jekyll</strong>：静态博客框架，需要<code>Ruby</code>、<code>RubyGems</code>、<code>Node.js</code>、<code>Python</code>环境。</li>
-<li><strong>HUGO</strong>：基于<code>Go</code>语言的静态网站生成器。</li>
-<li><strong>Hexo</strong>：基于<code>Node.js</code>的静态博客框架，下面会详细介绍。</li>
+<li><p>Docker是一个基于Go语言开发的应用容器引擎，在2013年作为开源容器引擎推出，可以说是为容器创建了行业标准。</p>
+</li>
+<li><p>Docker基于LXC的<strong>namspace</strong>，<strong>cgroup</strong>和<strong>Union FS</strong>三大技术开发：</p>
+<ul>
+<li><p>namespace（命名空间）可以隔离系统资源，把资源分配给不同的命名空间，不同命名空间内的进程互不干扰。当多个用户使用同一台Linux服务器时，每个用户只能访问自己所分配到的系统资源，但是总有一些操作需要有root权限，显然不可能给每一个用户root权限，这时候namespace可以解决这个问题，对该用户虚拟化一个namespace，在这个命名空间里面他拥有root权限，但在服务器层面该用户仍是普通用户。同样从进程的角度来说也是一样，在每一个命名空间内部，该用户的init进程编号pid总是为1，每一个用户都会觉得自己独占这个服务器，但从服务器角度来看，这些pid&#x3D;1的子进程只不过是父进程通过namespace映射出来的，在父进程内的pid可能为3，也可能为5。</p>
+</li>
+<li><p>cgroup（control group，控制组）可以对进程使用资源的总量进行限制，对进程的优先级进行分配，统计系统资源的使用量，并对进程挂起&#x2F;恢复。</p>
+</li>
+<li><p>Union FS（联合文件系统）是一种<strong>分层</strong>，轻量级，高性能的文件系统，是Doceker容器分层技术的基础。它使文件系统类似于洋葱一层一层的叠加，这也是为什么Docker镜像包含很多层，虽然外面看起来是一整个的系统。这种分层技术最大的好处就是可以资源共享，比如一台电脑上有很多基于Linux操作系统镜像的容器，通过Union FS只需要在磁盘上保留一份镜像就可以让所有容器共享。Docker的文件系统分为两层：bootfs和rootfs:</p>
+<ul>
+<li><p>bootfs (boot file system)：包含了bootloader和linux内核，用户不能对它做任何修改，启动完成后整个linux内核加载进内存，bootfs会被卸载掉。</p>
+</li>
+<li><p>rootfs (root file system)：系统根目录结构，与具体linux版本有关。</p>
+</li>
 </ul>
 </li>
-<li><p>博客想要一步到位很难，而且成本也不低，所以找准自己定位才是关键。当你选择了服务器的方式进行搭建，很多时候就会很尴尬：一年几百几千的服务器都租了，总得弄个哇塞点的域名吧，上xx云一看，好点的域名第一年显示几十，乍一看很便宜，等到你续费的时候直接给你干到几百，这时候你一咬牙，买！买了以后还要备案，搞SSL证书告诉别人这网站不是以小博大紧张刺激的乐园而是你的博客。折腾这么一圈，终于可以写博客了吧，还不行，像WordPress这种基于PHP开发的动态博客框架，得在服务器上配置一大堆环境像LNMP（Linux+Nginx+MySQL+PHP）&#x2F; LAMP（Apache），就算用宝塔面板，不熟悉PHP没几天根本搞不定。经过无数次尝试，你的博客终于搭建好了，但是你已经精疲力尽，丝毫没有写博客的欲望了，硬着头皮写了一篇，发现网站又404了，于是你开始看服务器日志，找帖子解决……以上这些过程当然也可以采用Docker进行安装便于后期自动化部署，但是总体来说太过复杂且完全不能专注于内容创作。</p>
+</ul>
+<p>  <img src="file.png" alt="file" loading="lazy">
+  </p>
 </li>
-<li><p><strong>HEXO</strong>是一款基于<code>Node.js</code>开发的快速、简洁且高效的静态博客框架，它天然可以部署到github page上，通过<code>https://username.github.io</code>的方式可以直接进行访问（默认支持SSL），而且由于是静态网页，加载速度很快，同时还有丰富的主题可供选择，用户数量也多，所以<em><strong>HEXO</strong></em>可以说是搭建个人博客的首选。</p>
+<li><p>如上图所示，aufs (advanced multi layered unification filesystem)是一种可堆叠的文件系统，Docker可以在同一内核上运行不同版本的linux，这也是为什么安装linux虚拟机好几个G，而Docker镜像才几百M，其实安装的就是rootfs。</p>
+</li>
+<li><p>除此之外，Docker镜像具有写时拷贝(Copy-on-Write)技术，即某容器对镜像的修改会被限制在该容器内。上面提到Docker镜像采用分层系统，在构建时一层一层构建，前一层是后一层的基础，每一层构建完就不再发生改变，当启动容器后，Docker会在镜像顶部添加新的一层，这层是可写的，被称为容器层，这层任何的改变都不会影响下面的只读镜像层。</p>
+<p>  <img src="file2.png" alt="file2" loading="lazy"></p>
 </li>
 </ul>
-<h3 id="2-Working-Principle"><a href="#2-Working-Principle" class="headerlink" title="2. Working Principle"></a>2. Working Principle</h3><ul>
-<li>要了解Hexo的原理，首先得了解一下它的文件结构，即博客文件夹的结构：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line"> ├── _config.yml   # 整个博客的配置文件。</span><br><span class="line"> ├── node_modules  # 依赖包,安装的插件以及Hexo所需的Node.js模块。</span><br><span class="line"> ├── scaffolds # 模板文件夹,新建文章时根据对应模版类型生成文件。</span><br><span class="line"> ├── source  # 资源文件夹，存放博客资源。</span><br><span class="line"> |   └── _posts # 博客文章目录。</span><br><span class="line"> └── themes # 主题文件夹，Hexo根据主题生成静态页面。</span><br><span class="line"> ├── public  # 最终得到的网页内容。</span><br><span class="line"> ├── db.json # source解析所得到的缓存文件。</span><br><span class="line"> ├── package.json  # 应用程序信息，Hexo运行需要的js包。</span><br><span class="line"> </span><br></pre></td></tr></table></figure></li>
-<li>Hexo博客文章的编写支持<code>markdown</code>语法，简单易用，不需要过多关注文章的排版格式，文章是<code>.md</code>类型的文件。</li>
-<li>Hexo的配置文件采用<code>yaml</code>语言编写，后缀为<code>.yml</code>，这种语言专门用来写配置文件，主题文件夹下也有一个<code>_config.yml</code>文件，是你使用该主题的配置文件。区别在于Hexo的配置文件是全局的，主要是站点的基本信息，文章的布局，写作的格式，部署到github上的参数等等，而主题的配置文件仅用于对该主题的一些界面及插件设置。</li>
-<li>当我们编写好博客文章以后，Hexo通过模版引擎进行渲染，模版引擎默认使用<code>ejs</code>编写（由使用的主题而定，还有<code>jade</code>，<code>swig</code>等），它是一种简单高效的模板语言，通过数据和模板，可以生成HTML页面。模版引擎的作用就是将界面与数据分离，将模板内容中指定的地方替换成数据，实现业务代码与逻辑代码分离。这里<em><strong>source</strong></em>文件夹就是数据，即博客的文章，<em><strong>theme</strong></em>文件夹就是界面，即博客的主题。</li>
-<li>当我们执行<code>hexo g</code>命令后，Hexo首先解析<code>.md</code>文件建立索引，然后根据<em><strong>theme&#x2F;layout</strong></em>的布局类型，通过模版引擎最终渲染为<code>html、css、js</code>等文件到<em><strong>public</strong></em>文件夹下，生成可供浏览器显示的静态文章。</li>
-<li>执行<code>hexo d</code>命令后，Hexo会把public文件夹的内容部署上去，如果使用github托管的话可以发现此时仓库里的文件就是public文件夹下的内容，并没有博客的源码。</li>
+</li>
+<li><p><strong>Docker的特点</strong><br>  正如它logo所表示的那样，Docker借鉴了集装箱的概念，它就像鲸鱼，容器就是一个个的集装箱，里面装着各种各样的软件及其配置环境，Docker并不关心集装箱里面具体装着什么东西，所有东西都以相同的方式装载进去，它们可以被运到你想部署的任何地方。基于这种特点，以及上述同传统虚拟方式的对比，很显然它具有以下优势：</p>
+<ul>
+<li>更高效的利用系统资源。</li>
+<li>更快速的启动时间。</li>
+<li>一致的运行环境。</li>
+<li>持续交付和部署。</li>
+<li>更轻松的迁移，维护和拓展。</li>
+</ul>
+</li>
 </ul>
 
 </article>
@@ -343,10 +375,10 @@
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
-        <a href="/2022/05/10/Hexo-2/" class="trm-cover-frame trm-anima-link">
+        <a href="/2023/02/12/Github-Action/" class="trm-cover-frame trm-anima-link">
             
             
-                <img alt="cover" src="/img/cover/1.jpg">
+                <img alt="cover" src="/img/cover/actions.png">
             
         </a>
         <div class="trm-card-descr">
@@ -356,14 +388,14 @@
                 </a>
             </div>
             <h5>
-                <a href="/2022/05/10/Hexo-2/" class="trm-anima-link">
-                    Hexo-2
+                <a href="/2023/02/12/Github-Action/" class="trm-anima-link">
+                    Github Actions (一)
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
             <ul class="trm-card-data trm-label">
-                <li>22/05/10</li>
-                <li>20:17</li>
+                <li>23/02/12</li>
+                <li>19:51</li>
                 
                 
             </ul>
@@ -371,6 +403,36 @@
     </div>
 </div>
     
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/01/06/HouseRental/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/2.jpg">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%B1%95%E7%A4%BA%E5%8C%BA/">
+                    展示区
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/01/06/HouseRental/" class="trm-anima-link">
+                    长租公寓平台
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/01/06</li>
+                <li>18:34</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
     
 </div>
 
