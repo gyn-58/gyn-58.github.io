@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Github Actions 自动化部署（一）这篇文章主要介绍 Github 自己的持续集成工具 Github Actions。1. DevOps 与 CI&#x2F;CD DevOps  DevOps 这个概念最早在大学的软件过程这门课中接触，当时觉得这种面向企业的软件开发管理模式离我们甚是遥远，没有实际操作仅仅是学一堆理论导致根本不了解它的好处到底在哪，正好借这次学习 CI&#x2F;CD 的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github Actions (一)">
+<meta property="og:url" content="http://gyn-58.github.io/2023/02/12/Github-Action/index.html">
+<meta property="og:site_name" content="Nong&#39;s Blog">
+<meta property="og:description" content="Github Actions 自动化部署（一）这篇文章主要介绍 Github 自己的持续集成工具 Github Actions。1. DevOps 与 CI&#x2F;CD DevOps  DevOps 这个概念最早在大学的软件过程这门课中接触，当时觉得这种面向企业的软件开发管理模式离我们甚是遥远，没有实际操作仅仅是学一堆理论导致根本不了解它的好处到底在哪，正好借这次学习 CI&#x2F;CD 的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://gyn-58.github.io/2023/02/12/Github-Action/CI_CD.png">
+<meta property="article:published_time" content="2023-02-12T11:51:50.000Z">
+<meta property="article:modified_time" content="2023-01-13T01:44:28.356Z">
+<meta property="article:author" content="Nong">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gyn-58.github.io/2023/02/12/Github-Action/CI_CD.png">
+
+
+<title >Github Actions (一)</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.png?v=1.1.1' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.png?v=1.1.1' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+    <link href='/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+
+
+    
+
+    
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"gyn-58.github.io","author":"Nong","root":"/","typed_text":["I am chasing the sun"],"favicon":{"logo":"/img/favicon.png","dark_logo":"/img/logo_dark.png","icon16":"/img/favicon.png","icon32":"/img/favicon.png","appleTouchIcon":null,"webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"/img/favicon.svg","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"theme_version":"1.1.1","theme":{"switch":true,"default":"style-dark"},"search":{"enable":false,"type":"engine","href":"https://www.google.com/search?q=site:","domain":null},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_button":"Copy","copy_success":"Copied","copy_failure":"Copy failed"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=1.1.1" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style=" position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				
+					<img alt="logo" class=" trm-light-icon" src="/img/favicon.png"> <img alt="logo" class=" trm-dark-icon" src="/img/logo_dark.png">
+				
+				
+					<div class="trm-logo-text">
+						YuNong<span>Guo</span>
+					</div>
+				
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/" target="">
+								Home
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/" target="">
+								Archives
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/" target="">
+								About
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+			
+			<!-- mode switcher place -->
+			
+			<div class="trm-mode-switcher-place">
+				<!-- <div class="trm-hidden-switcher"> -->
+					<div class="trm-mode-switcher">
+					  <i class="iconfont far fa-sun"></i>
+					  <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+					  <label class="trm-swich" for="trm-swich"></label>
+					  <i class="iconfont far fa-moon"></i>
+					</div>
+				  <!-- </div> -->
+			</div>
+			
+			<!-- mode switcher place end -->
+
+			 
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.jpeg">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-12">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text trm-text-center ">
+                        <div class="trm-label trm-mb-20">
+                            My Posts
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Github Actions (一)
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/12
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            19:51
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Nong
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article class="trm-publication">
+    <h1 id="Github-Actions-自动化部署（一）"><a href="#Github-Actions-自动化部署（一）" class="headerlink" title="Github Actions 自动化部署（一）"></a>Github Actions 自动化部署（一）</h1><h3 id="这篇文章主要介绍-Github-自己的持续集成工具-Github-Actions。"><a href="#这篇文章主要介绍-Github-自己的持续集成工具-Github-Actions。" class="headerlink" title="这篇文章主要介绍 Github 自己的持续集成工具 Github Actions。"></a>这篇文章主要介绍 Github 自己的持续集成工具 Github Actions。</h3><h3 id="1-DevOps-与-CI-x2F-CD"><a href="#1-DevOps-与-CI-x2F-CD" class="headerlink" title="1. DevOps 与 CI&#x2F;CD"></a>1. DevOps 与 CI&#x2F;CD</h3><ul>
+<li><p><strong>DevOps</strong></p>
+<ul>
+<li><p>DevOps 这个概念最早在大学的软件过程这门课中接触，当时觉得这种面向企业的软件开发管理模式离我们甚是遥远，没有实际操作仅仅是学一堆理论导致根本不了解它的好处到底在哪，正好借这次学习 CI&#x2F;CD 的机会，再重新认识一下它。</p>
+</li>
+<li><p>DevOps 是 Development 和 Operations 的组合，是一组过程、方法与系统的统称。</p>
+</li>
+<li><p>产生的原因：软件行业日益清晰地认识到为了按时交付软件产品和服务，开发(Dev)和运维(Ops)必须紧密合作，在保证软件高质量的前提下<u>缩短系统变更从提交到部署至生产环境的时间</u>。</p>
+</li>
+<li><p>主要目的：最大程度减少跨团队协作（例如开发和运维），通过<u><strong>自动化</strong></u>来加速软件变更和部署的流程，以缩短推向市场的时间。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>CI&#x2F;CD</strong></p>
+<ul>
+<li><p>CI&#x2F;CD 指的是持续集成(Continuous Integration)、持续交付(Continuous Delivery)、持续部署(Continuous Deployment)。</p>
+</li>
+<li><p>很明显，CI&#x2F;CD 就是实现 DevOps 自动化的一种方法，它贯穿软件开发的集成和测试、交付、部署阶段，由开发和运维团队以敏捷方式协同支持，其实也是 DevOps 的产物。</p>
+</li>
+<li><p>CI–持续集成：频繁地将通过自动化测试的代码集成(Push)到主干。集成测试的过程是完全自动化的，由专门的集成服务器进行构建，这样可以及早发现代码的问题，及早解决，避免代码堆积。</p>
+</li>
+<li><p>CD–持续交付：建立一个可随时将开发环境的功能部署到生产环境的代码库。持续交付可以大大缩短软件开发周期，能够保证软件在任何时候都能可靠地发布出去。</p>
+</li>
+<li><p>CD–持续部署：自动地将软件部署到生产环境，使得开发人员对软件功能的修改可以及时生效，大大提高了运维人员的部署效率。</p>
+</li>
+<li><p>CI&#x2F;CD就是一整个自动化的流程，也叫管道(Pipeline)，用于实现应用开发中的高度持续自动化和持续监控。</p>
+</li>
+</ul>
+<p>  <img src="CI_CD.png" alt="CI:CD" loading="lazy"></p>
+</li>
+</ul>
+<h3 id="2-Github-Actions"><a href="#2-Github-Actions" class="headerlink" title="2. Github Actions"></a>2. Github Actions</h3><ul>
+<li><p>Github Actions 是 Github 开发的 CI&#x2F;CD 平台，在 2018 年推出，2019 年 11 月对所有用户全面开放。</p>
+</li>
+<li><p>上面提到 CI&#x2F;CD 自动化流程由很多操作组成，这些操作就是 Actions，而 Github Actions 有自己完整的一套术语：</p>
+<ul>
+<li><p>workflow：一个完整的工作流程，包含多个任务(jobs)。</p>
+</li>
+<li><p>job：任务，jobs 包含一个或多个 job，每个 job 由一系列的步骤(steps)组成。</p>
+</li>
+<li><p>step：步骤，每个步骤可以执行一个或多个动作(action)。</p>
+</li>
+<li><p>action：每个 action 就是最基本的动作单元。</p>
+</li>
+</ul>
+</li>
+<li><p>Github Actions 的整个流程由很多个基本动作 action 组成，每个 action 都是一个脚本，Github 提供了一个<a target="_blank" rel="noopener" href="https://github.com/marketplace?type=actions">action 商店</a>，里面有各种各样的 action。很多动作可以直接通过<code>actions/action_name</code>的方式直接引用它而不必自己编写，大大节省了时间。比如安装 Node.js 就可以直接通过<code>actions/setup-node</code>实现。</p>
+</li>
+<li><p>Github 提供了 Linux、Windows 和 macOS 环境来运行整个 CI&#x2F;CD 流程，普通用户每个月可以享受 500MB 的免费存储以及 2000 分钟数的运行时间，但是存储空间使用量不会重置，且在 GitHub 主机的 Windows 和 macOS 运行器上运行的作业，其消耗分钟数是在 Linux 运行器上运行的作业的 2 倍和 10 倍。例如，1000 分钟的 Windows 使用时间将占用帐户中包含的 2000 分钟，1000 分钟的 macOS 使用时间将占用帐户中包含的 10000 分钟。</p>
+</li>
+<li><p>Github Actions 的配置文件称为 workflow 文件，存放在仓库的<code>.github/workflows</code>目录，采用之前提到过的<code>yaml</code>格式编写，它的一些基本字段如下：</p>
+<ul>
+<li><p>name：workflow 的名称，默认为当前 workflow 配置文件名。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name: Github Actions</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>on：指定触发 workflow 的条件，通常是某些事件，例如当 push 代码到仓库时触发该自动化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">on: push</span><br></pre></td></tr></table></figure>
+
+<p>也可以指定仓库的具体分支，例如 push 代码到仓库的 main 分支时才会触发：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">on: </span><br><span class="line">  push:</span><br><span class="line">    branches:</span><br><span class="line">      - main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>jobs：表示要执行的一项或多项任务。如无特殊指定，job 之间是并发执行的，可以通过 needs 控制它们的执行顺序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jobs:</span><br><span class="line">  job1:</span><br><span class="line">    ···</span><br><span class="line">    </span><br><span class="line">  job2:</span><br><span class="line">    needs: job1</span><br><span class="line">    </span><br><span class="line">  job3:</span><br><span class="line">    needs: [job1, job2]</span><br></pre></td></tr></table></figure>
+
+<p>上面定义的任务执行顺序为<code>job1 --&gt; job2 --&gt; job3</code>。</p>
+</li>
+<li><p>job –&gt; runs-on：指定任务运行的虚拟机环境，目前可用的虚拟机环境如下：</p>
+<ul>
+<li><p>ubuntu-latest，ubuntu-18.04或ubuntu-16.04</p>
+</li>
+<li><p>windows-latest，windows-2019或windows-2016</p>
+</li>
+<li><p>macOS-latest或macOS-10.14</p>
+</li>
+</ul>
+<p>通常 Github 会提供 2 核处理器、7 GB内存和 14 GB固态硬盘的 runner。</p>
+</li>
+<li><p>env：可以给任务(jobs)或步骤(steps)配置环境变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">env: </span><br><span class="line">  name: &quot;gyn&quot;</span><br><span class="line">run: |</span><br><span class="line">  echo $name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>steps：指定每个 job 的运行步骤，每个 job 包含多个 step，从上到下依次执行。每个 step 包含以下字段：</p>
+<ul>
+<li><p>name：步骤的名称。</p>
+</li>
+<li><p>env：该步骤所需的环境变量。</p>
+</li>
+<li><p>id：每个步骤的标识符。</p>
+</li>
+<li><p>uses：步骤使用的 action。</p>
+</li>
+<li><p>with：指定 action 所需参数。例如安装 Node.js：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- name: Setup Node</span><br><span class="line">  uses: actions/setup-node@v1</span><br><span class="line">  with:</span><br><span class="line">    node-version: [16.x]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>run：具体执行哪些指令。</p>
+</li>
+<li><p>continue-on-error：设置为 true 时当此步骤失败仍允许 job 通过。</p>
+</li>
+<li><p>timeout-minutes：设置 step 的超时时间。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</article>
+    
+    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/13/Github-Aciton-2/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/actions.png">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%9B%E4%BD%9C%E5%8C%BA/">
+                    创作区
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/13/Github-Aciton-2/" class="trm-anima-link">
+                    Github Acitons (二)
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/02/13</li>
+                <li>09:42</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/01/18/Docker/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/Docker_logo.jpeg">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%9B%E4%BD%9C%E5%8C%BA/">
+                    创作区
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/01/18/Docker/" class="trm-anima-link">
+                    Docker
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/01/18</li>
+                <li>11:12</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+    
+    
+        <div class="trm-footer-item">
+            <span>© 2022- 2023</span>
+            <span class="footer-separator">·</span>
+            <span class="trm-accent-color">Nong</span>
+        </div>
+    
+    
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
+            </span>
+        </div>
+      
+    
+    
+        <div class="trm-footer-item">
+            The blog has been running for <span id="since" class="trm-accent-color"></span> days
+        </div>
+     
+    
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("05/08/2022 17:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  <div id="trm-back-top" class="trm-back-top">
+    <i class="iconfont fas fa-arrow-up"></i>
+</div>
+  
+  <!-- Plugin -->
+
+
+
+    
+    
+
+    
+<script src="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=1.1.1"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+
+    <!-- 评论插件 -->
+    
+        
+        
+    
+
+
+
+<!-- 评论插件 -->
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=1.1.1"></script>
+
+</body>
+
+</html>

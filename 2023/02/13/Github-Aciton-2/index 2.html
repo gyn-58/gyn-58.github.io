@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Github Actions 自动化部署（二）这篇文章主要介绍用 Github Actions 自动化部署 Hexo。1. 前景提要 由于 Hexo 属于轻量级的静态博客，博客环境只能部署在本地，如果换一个电脑写博客的话只能在新电脑上重新配置一套完整的环境，十分麻烦。所以最近一直在想有没有什么简便（tou lan）的方法可以把这些环境打包起来，以便我在任何电脑上都可以直接写文章、发文章，没错，我说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github Acitons (二)">
+<meta property="og:url" content="http://gyn-58.github.io/2023/02/13/Github-Aciton-2/index.html">
+<meta property="og:site_name" content="Nong&#39;s Blog">
+<meta property="og:description" content="Github Actions 自动化部署（二）这篇文章主要介绍用 Github Actions 自动化部署 Hexo。1. 前景提要 由于 Hexo 属于轻量级的静态博客，博客环境只能部署在本地，如果换一个电脑写博客的话只能在新电脑上重新配置一套完整的环境，十分麻烦。所以最近一直在想有没有什么简便（tou lan）的方法可以把这些环境打包起来，以便我在任何电脑上都可以直接写文章、发文章，没错，我说">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://gyn-58.github.io/2023/02/13/Github-Aciton-2/1.png">
+<meta property="og:image" content="http://gyn-58.github.io/2023/02/13/Github-Aciton-2/2.png">
+<meta property="og:image" content="http://gyn-58.github.io/2023/02/13/Github-Aciton-2/3.png">
+<meta property="og:image" content="http://gyn-58.github.io/2023/02/13/Github-Aciton-2/4.png">
+<meta property="article:published_time" content="2023-02-13T01:42:11.000Z">
+<meta property="article:modified_time" content="2023-01-13T09:28:33.983Z">
+<meta property="article:author" content="Nong">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gyn-58.github.io/2023/02/13/Github-Aciton-2/1.png">
+
+
+<title >Github Acitons (二)</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.png?v=1.1.1' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.png?v=1.1.1' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+    <link href='/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+
+
+    
+
+    
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"gyn-58.github.io","author":"Nong","root":"/","typed_text":["I am chasing the sun"],"favicon":{"logo":"/img/favicon.png","dark_logo":"/img/logo_dark.png","icon16":"/img/favicon.png","icon32":"/img/favicon.png","appleTouchIcon":null,"webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"/img/favicon.svg","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"theme_version":"1.1.1","theme":{"switch":true,"default":"style-dark"},"search":{"enable":false,"type":"engine","href":"https://www.google.com/search?q=site:","domain":null},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_button":"Copy","copy_success":"Copied","copy_failure":"Copy failed"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=1.1.1" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style=" position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				
+					<img alt="logo" class=" trm-light-icon" src="/img/favicon.png"> <img alt="logo" class=" trm-dark-icon" src="/img/logo_dark.png">
+				
+				
+					<div class="trm-logo-text">
+						YuNong<span>Guo</span>
+					</div>
+				
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/" target="">
+								Home
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/" target="">
+								Archives
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/" target="">
+								About
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+			
+			<!-- mode switcher place -->
+			
+			<div class="trm-mode-switcher-place">
+				<!-- <div class="trm-hidden-switcher"> -->
+					<div class="trm-mode-switcher">
+					  <i class="iconfont far fa-sun"></i>
+					  <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+					  <label class="trm-swich" for="trm-swich"></label>
+					  <i class="iconfont far fa-moon"></i>
+					</div>
+				  <!-- </div> -->
+			</div>
+			
+			<!-- mode switcher place end -->
+
+			 
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.jpeg">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-12">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text trm-text-center ">
+                        <div class="trm-label trm-mb-20">
+                            My Posts
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Github Acitons (二)
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/13
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            09:42
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Nong
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article class="trm-publication">
+    <h1 id="Github-Actions-自动化部署（二）"><a href="#Github-Actions-自动化部署（二）" class="headerlink" title="Github Actions 自动化部署（二）"></a>Github Actions 自动化部署（二）</h1><h3 id="这篇文章主要介绍用-Github-Actions-自动化部署-Hexo。"><a href="#这篇文章主要介绍用-Github-Actions-自动化部署-Hexo。" class="headerlink" title="这篇文章主要介绍用 Github Actions 自动化部署 Hexo。"></a>这篇文章主要介绍用 Github Actions 自动化部署 Hexo。</h3><h3 id="1-前景提要"><a href="#1-前景提要" class="headerlink" title="1. 前景提要"></a>1. 前景提要</h3><ul>
+<li><p>由于 Hexo 属于轻量级的静态博客，博客环境只能部署在本地，如果换一个电脑写博客的话只能在新电脑上重新配置一套完整的环境，十分麻烦。所以最近一直在想有没有什么简便（tou lan）的方法可以把这些环境打包起来，以便我在任何电脑上都可以直接写文章、发文章，没错，我说的不是 Docker ，而是我们的主角：Github Actions。</p>
+</li>
+<li><p>说实话这个需求的实现我的第一反应就是：Docker，但是走到哪都得带着打包好的镜像实在不方便，镜像一丢都白搭，而且其实对于 Hexo 这种轻量级的框架，说白了就是安装一个 Node.js，折腾 Docker 有点不划算，它更适合部署类似于 WordPress 的 LNMP 环境，所以我差点整个推倒重来（hia hia）。换个思路，既然博客托管在 Github 上，那么有没有可以实现对仓库代码自动化部署的工具呢？经过一番了解，Travis CI 和 Github Actions 是最多的解决方案。</p>
+</li>
+<li><p>Travis CI 是 linux 平台的开源持续集成构建项目，开源项目免费使用，也是采用<code>yaml</code>格式来编写，使用的人很多，但是相比于同一个生态环境下的 Github Actions 在速度上要慢一些，而且 Travis CI 总是被墙，所以这里直接选择 Github Actions 省心一点。不得不说生态环境真的是很重要，虽然它起步晚，但是与 Github 一结合，把共享的玩法用到 actions 上，对私有项目也可以免费使用，发展速度迅速，对于大部分场景来说完全够用了。</p>
+</li>
+</ul>
+<h3 id="2-自动化部署-Hexo"><a href="#2-自动化部署-Hexo" class="headerlink" title="2. 自动化部署 Hexo"></a>2. 自动化部署 Hexo</h3><ul>
+<li><p>现在博客托管到 Github 的仓库是公开的，里面只有经过 Hexo 渲染可以直接发布的内容，所以还要新建一个博客源码仓库来存放博客源码，这里仓库类型设置为<code>private</code>，同时勾选<code>Add a README file</code>来完成仓库的初始化。</p>
+<p><img src="1.png" alt="1" loading="lazy"></p>
+</li>
+<li><p>在终端输入以下命令生成部署密钥：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -f github-deploy-key</span><br></pre></td></tr></table></figure>
+
+<p>一路按回车，此时在当前目录下会生成一个公钥文件<code>github-deploy-key.pub</code>和一个私钥文件<code>github-deploy-key</code>。</p>
+</li>
+<li><p>复制私钥文件<code>github-deploy-key</code>的内容，到存放 <strong>博客源码</strong> 的仓库 Blog 里，在<code>Settings --&gt; Secrets and variables --&gt; Actions --&gt; New repository secret</code>页面，粘贴到<code>Value</code>里，<code>Name</code>框填写<code>HEXO_DEPLOY_PRI</code>。这里必须要格外注意两个问题，否则后面 action 会报错<code>Fatal: Could not read from remote repository.</code>：</p>
+<ul>
+<li>私钥文件<code>github-deploy-key</code>的内容是从<code>-----BEGIN OPENSSH PRIVATE KEY-----</code>开始，到<code>-----END OPENSSH PRIVATE KEY-----</code>结束，包括这两句话！一定不要少复制了，之前就是一直连接失败，排查了好久才发现是这个问题 @__@</li>
+<li>创建私钥的位置一定要严格按照上面的路径来，不要创建到别的地方去了，这里是部署密钥，不是与 Github 连接的那个账户密钥。</li>
+</ul>
+</li>
+<li><p>复制公钥文件<code>github-deploy-key.pub</code>的内容，在<strong>博客所托管的仓库页面</strong>，按<code>Settings --&gt; Deploy keys --&gt; Add deploy key</code>路径添加，在<code>Title</code>里填写<code>HEXO_DEPLOY_PUB</code>，<code>Key</code>里粘贴公钥内容(以<code>ssh-rsa</code>开头)，最后勾选<code>Allow write access</code>选项添加完成。</p>
+</li>
+<li><p>接下来把博客源码提交到仓库里面，这里也有几个细节需要注意：</p>
+<ul>
+<li><code>node_modules</code>文件夹和<code>public</code>文件夹不需要提交，所以建议把本地博客源码文件夹复制一份，把这两个文件夹删除后再提交。<code>node_modules</code>文件夹在安装完 Node.js 以后会自动生成，这个步骤在 Github Actions 提供的虚拟机里完成，<code>public</code>文件夹也同理，我们只需要提交单纯博客的源码（包括主题和文章相关）即可。</li>
+<li>在博客源码文件夹下，要先 <strong>pull</strong>，才能 <strong>push</strong>。因为本地仓库和远程仓库实际上是两个独立的仓库，如果是直接 clone 到本地的话就不会有这个问题。</li>
+</ul>
+<p>所以结合以上两点，切换到处理好的博客源码文件夹下执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git init # 使该文件夹可以由 git 管理</span><br><span class="line"></span><br><span class="line">$ git add . # 把文件夹内容添加进去</span><br><span class="line"></span><br><span class="line">$ git commit -m &quot;First Commit&quot;  # 把文件提交到仓库</span><br><span class="line"></span><br><span class="line">$ git remote add origin git@github.com:gyn-58/Blog.git  # 关联到远程仓库</span><br><span class="line"></span><br><span class="line">$ git pull origin main -allow-unrelated-histories  # 合并两个仓库的历史</span><br><span class="line"></span><br><span class="line">$ git push -u origin main  # 第一次推送加上 -u 可以关联分支</span><br></pre></td></tr></table></figure>
+
+<p>现在，博客源码已经提交到了远程 Blog 仓库。</p>
+</li>
+<li><p>在 Blog 仓库根目录下创建<code>.github/workflows/deploy.yml</code>文件。目录结构如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Blog  </span><br><span class="line">└── .github  </span><br><span class="line">     └── workflows  </span><br><span class="line">         └── deploy.yml</span><br></pre></td></tr></table></figure>
+
+<p>然后编写<code>deploy.yml</code>配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">name: Hexo Auto Deploy</span><br><span class="line"></span><br><span class="line">on:</span><br><span class="line">  # 当 push 到仓库的 main 分支时触发</span><br><span class="line">  push:</span><br><span class="line">    branches: [ &quot;main&quot; ]</span><br><span class="line">    </span><br><span class="line">  # 手动触发</span><br><span class="line">  workflow_dispatch:</span><br><span class="line">  </span><br><span class="line"># 环境变量</span><br><span class="line">env:</span><br><span class="line">  GIT_USER: gyn-58</span><br><span class="line">  GIT_EMAIL: gyunong@126.com</span><br><span class="line">  DEPLOY_REPO: gyn-58/gyn-58.github.io</span><br><span class="line">  DEPLOY_BRANCH: main</span><br><span class="line">  </span><br><span class="line"># 任务</span><br><span class="line">jobs:</span><br><span class="line"> </span><br><span class="line">  build:</span><br><span class="line">    name: Build on node $&#123;&#123; matrix.node_version &#125;&#125; and $&#123;&#123; matrix.os &#125;&#125;</span><br><span class="line">    runs-on: ubuntu-latest</span><br><span class="line">    # 策略，用于创建作业的构建矩阵</span><br><span class="line">    strategy:</span><br><span class="line">      # 用于访问为当前作业配置的矩阵参数</span><br><span class="line">      matrix:</span><br><span class="line">        os: [ubuntu-latest]</span><br><span class="line">        node_version: [16.x]</span><br><span class="line"></span><br><span class="line">    # 步骤</span><br><span class="line">    steps:</span><br><span class="line">      - name: Clone repository</span><br><span class="line">        uses: actions/checkout@v2</span><br><span class="line">        with: </span><br><span class="line">          submodules: true # 可以获取子模块</span><br><span class="line">          </span><br><span class="line">      - name: Checkout deploy repo</span><br><span class="line">        uses: actions/checkout@v2</span><br><span class="line">        with:</span><br><span class="line">           repository: $&#123;&#123; env.DEPLOY_REPO &#125;&#125;</span><br><span class="line">           ref: $&#123;&#123; env.DEPLOY_BRANCH &#125;&#125;</span><br><span class="line">           path: .deploy_git</span><br><span class="line"></span><br><span class="line">      - name: Use Node.js $&#123;&#123; matrix.node_version &#125;&#125;</span><br><span class="line">        uses: actions/setup-node@v1</span><br><span class="line">        with:</span><br><span class="line">          node-version: $&#123;&#123; matrix.node_version &#125;&#125;</span><br><span class="line"></span><br><span class="line">      - name: Configuration environment</span><br><span class="line">        env:</span><br><span class="line">          HEXO_DEPLOY_PRI: $&#123;&#123;secrets.HEXO_DEPLOY_PRI&#125;&#125;</span><br><span class="line">        run: |</span><br><span class="line">          sudo timedatectl set-timezone &quot;Asia/Shanghai&quot;</span><br><span class="line">          mkdir -p ~/.ssh/</span><br><span class="line">          echo &quot;$HEXO_DEPLOY_PRI&quot; &gt; ~/.ssh/id_rsa</span><br><span class="line">          chmod 600 ~/.ssh/id_rsa</span><br><span class="line">          echo &#x27;Host github.com\nUser gyunong@126.com\nHostname ssh.github.com\nPreferredAuthentications publickey\nIdentityFile ~/.ssh/id_rsa\nPort 443&#x27; &gt; ~/.ssh/config</span><br><span class="line">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span><br><span class="line">          git config --global user.name $GIT_USER</span><br><span class="line">          git config --global user.email $GIT_EMAIL</span><br><span class="line">         </span><br><span class="line">      - name: Install dependencies</span><br><span class="line">        run: |</span><br><span class="line">          npm install hexo-cli -g</span><br><span class="line">          # 安装 Hexo 相关依赖</span><br><span class="line">          npm install hexo-deployer-git hexo-asset-image hexo-generator-category --save</span><br><span class="line">          </span><br><span class="line">      - name: Deploy hexo</span><br><span class="line">        run: |</span><br><span class="line">          hexo clean</span><br><span class="line">          hexo g -d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在简单编写一篇文章，放到博客源码文件夹内，用上面的步骤 push 到 Blog 仓库，可以看到 Github Actions 成功触发。</p>
+<p><img src="2.png" alt="2" loading="lazy"></p>
+</li>
+<li><p>这样就通过 Github Actions 实现了对 Hexo 的自动化部署，当我在另外一台电脑上写博客时只需要把存放博客源码的仓库 clone 下来，写好以后再 push 上去就可以直接发布新文章，节省时间的同时也相当于对博客做了备份。</p>
+</li>
+</ul>
+<h3 id="3-图片"><a href="#3-图片" class="headerlink" title="3. 图片"></a>3. 图片</h3><ul>
+<li><p>在测试自动化部署的过程中发现如果我想在文章里面添加图片，原来本地环境下的方法是不行的。</p>
+</li>
+<li><p>本地环境下通过修改 Hexo 配置文件里的<code>post_asset_folder</code>属性，在创建新的 post 时会自动创建一个同名文件夹，里面存放 post 用到的图片，通过相对路径进行引用。</p>
+</li>
+<li><p>由上面的过程可以发现，Github Action 是在虚拟机环境下重新配置了 Hexo，它的配置文件属性与本地的并不一样，即使我通过命令语句更改它文件内的属性，图片仍无法加载。相对路径引用的方法只适合在本地环境下，环境一变它就很难加载出来，在 Hexo 官网也有网友提到了相关的问题：</p>
+</li>
+</ul>
+<p><img src="3.png" alt="3" loading="lazy"></p>
+<p>​    Hexo 应该把 post 放在资源文件夹下，可惜它并没有这样做，所以只能通过图床的方法插入图片了。</p>
+<ul>
+<li><p>图床软件有很多，这里我选择的是 PicGo。本质上来讲它就是一个能快速把图片上传到云端的图形化界面，上传以后自动复制图片的 url ，通过 url 的方式来显示图片。PicGo 里面有腾讯云 COS、阿里云 OSS、Github、七牛云等图床可以选择。</p>
+</li>
+<li><p>腾讯云 COS 即对象存储（Cloud Object Storage）是由腾讯云推出的无目录层次结构、无数据格式限制，可容纳海量数据且支持 HTTP&#x2F;HTTPS 协议访问的分布式存储服务。其它图床的意思也是一样，这里直接选择 GitHub。</p>
+</li>
+<li><p>建立一个专门存放图片的仓库 pictures ，在 Github 上按<code>Settings --&gt; Developer settings --&gt; Personal access tokens</code>路径，点击<code>Generate new token</code>生成 token 并粘贴到 PicGo 的图床设置页面：</p>
+</li>
+</ul>
+<p><img src="4.png" alt="4" loading="lazy"></p>
+<ul>
+<li>下次再插入图片时只需要把图片拖拽到 PicGo 的上传窗口，它会自动把图片的 url 复制下来，直接引用即可。</li>
+</ul>
+
+</article>
+    
+    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/12/Github-Action/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/actions.png">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%9B%E4%BD%9C%E5%8C%BA/">
+                    创作区
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/12/Github-Action/" class="trm-anima-link">
+                    Github Actions (一)
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/02/12</li>
+                <li>19:51</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+    
+    
+        <div class="trm-footer-item">
+            <span>© 2022- 2023</span>
+            <span class="footer-separator">·</span>
+            <span class="trm-accent-color">Nong</span>
+        </div>
+    
+    
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
+            </span>
+        </div>
+      
+    
+    
+        <div class="trm-footer-item">
+            The blog has been running for <span id="since" class="trm-accent-color"></span> days
+        </div>
+     
+    
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("05/08/2022 17:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  <div id="trm-back-top" class="trm-back-top">
+    <i class="iconfont fas fa-arrow-up"></i>
+</div>
+  
+  <!-- Plugin -->
+
+
+
+    
+    
+
+    
+<script src="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=1.1.1"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+
+    <!-- 评论插件 -->
+    
+        
+        
+    
+
+
+
+<!-- 评论插件 -->
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=1.1.1"></script>
+
+</body>
+
+</html>

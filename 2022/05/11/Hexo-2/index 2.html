@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="关于Hexo搭建博客（二）这篇文章主要记录Hexo的配置过程。 由于Mac纯天然的unix终端，可以直接在终端使用node.js，Windows环境需要安装git并在git里使用它，上节提到Hexo是基于node.js的框架，安装地址在这里。node.js自带npm，它是node.js的包管理工具，用于安装node.js的各种扩展。安装完成后在shell输入以下命令查看版本： 12$ node -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo-2">
+<meta property="og:url" content="http://gyn-58.github.io/2022/05/11/Hexo-2/index.html">
+<meta property="og:site_name" content="Nong&#39;s Blog">
+<meta property="og:description" content="关于Hexo搭建博客（二）这篇文章主要记录Hexo的配置过程。 由于Mac纯天然的unix终端，可以直接在终端使用node.js，Windows环境需要安装git并在git里使用它，上节提到Hexo是基于node.js的框架，安装地址在这里。node.js自带npm，它是node.js的包管理工具，用于安装node.js的各种扩展。安装完成后在shell输入以下命令查看版本： 12$ node -">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://gyn-58.github.io/2022/05/11/Hexo-2/1.png">
+<meta property="article:published_time" content="2022-05-11T12:17:16.000Z">
+<meta property="article:modified_time" content="2023-01-15T01:45:28.226Z">
+<meta property="article:author" content="Nong">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gyn-58.github.io/2022/05/11/Hexo-2/1.png">
+
+
+<title >Hexo-2</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.png?v=1.1.1' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.png?v=1.1.1' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+    <link href='/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+
+
+    
+
+    
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"gyn-58.github.io","author":"Nong","root":"/","typed_text":["I am chasing the sun"],"favicon":{"logo":"/img/favicon.png","dark_logo":"/img/logo_dark.png","icon16":"/img/favicon.png","icon32":"/img/favicon.png","appleTouchIcon":null,"webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"/img/favicon.svg","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"theme_version":"1.1.1","theme":{"switch":true,"default":"style-dark"},"search":{"enable":false,"type":"engine","href":"https://www.google.com/search?q=site:","domain":null},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_button":"Copy","copy_success":"Copied","copy_failure":"Copy failed"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=1.1.1" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style=" position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				
+					<img alt="logo" class=" trm-light-icon" src="/img/favicon.png"> <img alt="logo" class=" trm-dark-icon" src="/img/logo_dark.png">
+				
+				
+					<div class="trm-logo-text">
+						YuNong<span>Guo</span>
+					</div>
+				
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/" target="">
+								Home
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/" target="">
+								Archives
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/" target="">
+								About
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+			
+			<!-- mode switcher place -->
+			
+			<div class="trm-mode-switcher-place">
+				<!-- <div class="trm-hidden-switcher"> -->
+					<div class="trm-mode-switcher">
+					  <i class="iconfont far fa-sun"></i>
+					  <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+					  <label class="trm-swich" for="trm-swich"></label>
+					  <i class="iconfont far fa-moon"></i>
+					</div>
+				  <!-- </div> -->
+			</div>
+			
+			<!-- mode switcher place end -->
+
+			 
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.jpeg">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-12">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text trm-text-center ">
+                        <div class="trm-label trm-mb-20">
+                            My Posts
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Hexo-2
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2022
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            05/11
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            20:17
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Nong
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article class="trm-publication">
+    <h1 id="关于Hexo搭建博客（二）"><a href="#关于Hexo搭建博客（二）" class="headerlink" title="关于Hexo搭建博客（二）"></a>关于Hexo搭建博客（二）</h1><h3 id="这篇文章主要记录Hexo的配置过程。"><a href="#这篇文章主要记录Hexo的配置过程。" class="headerlink" title="这篇文章主要记录Hexo的配置过程。"></a>这篇文章主要记录Hexo的配置过程。</h3><ol>
+<li><p>由于Mac纯天然的unix终端，可以直接在终端使用node.js，Windows环境需要安装git并在git里使用它，上节提到Hexo是基于node.js的框架，安装地址<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">在这里</a>。node.js自带npm，它是node.js的包管理工具，用于安装node.js的各种扩展。安装完成后在shell输入以下命令查看版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
+<p>由于npm安装插件是从国外服务器下载，受网络影响比较大，所以淘宝做了个国内镜像cnpm，输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<p>进行安装，检查cnpm是否安装成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm -v</span><br></pre></td></tr></table></figure></li>
+<li><p>下面就好办多了，用cnpm安装Hexo：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<p>之后要新建一个博客文件夹，以Blog为例，cd到Blog目录下，执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br><span class="line">$ cnpm install</span><br></pre></td></tr></table></figure>
+<p>初始化博客，然后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+<p>启动本地博客，会出现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Hexo is running at http://localhost:4000/ . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<p>浏览器打开即可。</p>
+</li>
+<li><p>以上Hexo的基本配置就完成了，这里再详细介绍一下Blog文件夹下的目录结构：<br><img src="1.png" alt="1" loading="lazy"></p>
+</li>
+</ol>
+<ul>
+<li><p><em><strong>_config.yml</strong></em>：Hexo的配置文件，博客在github上的部署，主题的设置，以及博客文章的分类等属性都要在这里进行设置。</p>
+</li>
+<li><p><em><strong>node_modules</strong></em>：node相关依赖包，不需要更改。</p>
+</li>
+<li><p><em><strong>public</strong></em>：用于存放部署后的页面，部署后自动生成。</p>
+</li>
+<li><p><em><strong>scaffolds</strong></em>：文章的模版文件，包括page、post、draft，内容有点多，这个放到后面说。</p>
+</li>
+<li><p><em><strong>source</strong></em>：存放博客的所有文章(.md)。</p>
+</li>
+<li><p><em><strong>themes</strong></em>：博客的主题文件，可以在<a target="_blank" rel="noopener" href="https://hexo.io/themes/">Hexo的主题页面</a>选择自己喜欢的主题进行下载，下载完成后需要放到该文件夹下，同时为了使新主题生效，在博客的<code>_config.yml</code>文件内修改theme属性，”theme: 主题名字”，主题名字即<em><strong>themes</strong></em>文件夹下要使用主题的文件名。</p>
+</li>
+</ul>
+<ol start="4">
+<li>还剩一步就大功告成了，下面把博客部署到github。</li>
+</ol>
+<p>首先在github上创建一个以<code>username.github.io</code>命名的仓库，这样命名是为了便于后续通过网址访问博客。</p>
+<p>用下面的指令产生公钥，把公钥<code>id_ras.pub</code>的内容复制到<code>github --&gt; 个人设置settings --&gt; SSH and GPG keys --&gt; New SSH key</code>里面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -b 4096 -C “your_email@youremail.com“</span><br><span class="line">$ cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>加上<code>-b 4096</code>可以不用每次都输密码。</p>
+<p>检查是否连接成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@git.coding.net</span><br></pre></td></tr></table></figure>
+<p>还是在***_config.yml***文件夹内，最下面修改deploy属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: &#x27;git&#x27;</span><br><span class="line">  repo: git@github.com:gyn-58/gyn-58.github.io.git </span><br><span class="line">                     # 用户名/仓库名</span><br><span class="line">  branch: main # 注意要选择仓库对应分支</span><br></pre></td></tr></table></figure>
+<p>这里的分支一定要注意不要选错了，github上新建一个仓库，默认分支以前是<strong>master</strong>，好像是带有种族歧视的意思还是怎么样，现在都是<strong>main</strong>了。</p>
+<p>然后在Blog目录下执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;yourname&quot;</span><br><span class="line">$ git config --global user.email &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
+<p>安装hexo的部署插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>最后把博客部署到github：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+<p><code>hexo -g</code>即generate生成静态文章，后面追加<code>-d</code>即deploy部署文章。</p>
+<p>到此为止，已经可以把博客部署到github上并通过<code>https://用户名.github.io</code>进行访问了。</p>
+
+</article>
+    
+    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2022/05/12/Hexo-3/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/1.jpg">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%9B%E4%BD%9C%E5%8C%BA/">
+                    创作区
+                </a>
+            </div>
+            <h5>
+                <a href="/2022/05/12/Hexo-3/" class="trm-anima-link">
+                    Hexo-3
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>22/05/12</li>
+                <li>19:07</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2022/05/10/Hexo-1/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/1.jpg">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%9B%E4%BD%9C%E5%8C%BA/">
+                    创作区
+                </a>
+            </div>
+            <h5>
+                <a href="/2022/05/10/Hexo-1/" class="trm-anima-link">
+                    Hexo-1
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>22/05/10</li>
+                <li>09:29</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+    
+    
+        <div class="trm-footer-item">
+            <span>© 2022- 2023</span>
+            <span class="footer-separator">·</span>
+            <span class="trm-accent-color">Nong</span>
+        </div>
+    
+    
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
+            </span>
+        </div>
+      
+    
+    
+        <div class="trm-footer-item">
+            The blog has been running for <span id="since" class="trm-accent-color"></span> days
+        </div>
+     
+    
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("05/08/2022 17:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  <div id="trm-back-top" class="trm-back-top">
+    <i class="iconfont fas fa-arrow-up"></i>
+</div>
+  
+  <!-- Plugin -->
+
+
+
+    
+    
+
+    
+<script src="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=1.1.1"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+
+    <!-- 评论插件 -->
+    
+        
+        
+    
+
+
+
+<!-- 评论插件 -->
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=1.1.1"></script>
+
+</body>
+
+</html>

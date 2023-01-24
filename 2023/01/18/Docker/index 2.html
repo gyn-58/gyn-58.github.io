@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Docker入门这篇文章主要介绍Docker的相关概念以及它的一些特点。1. Containers–容器 虚拟化技术VT (Visualization Technology)  虚拟化技术本质上来讲就是可以让一个CPU工作起来就像多个CPU并行运行，从而使得在一台电脑内可以同时运行多个操作系统，也就是常说的虚拟机(Visual Machine)。它的核心技术hypervisor也叫虚拟机监视器(V">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker">
+<meta property="og:url" content="http://gyn-58.github.io/2023/01/18/Docker/index.html">
+<meta property="og:site_name" content="Nong&#39;s Blog">
+<meta property="og:description" content="Docker入门这篇文章主要介绍Docker的相关概念以及它的一些特点。1. Containers–容器 虚拟化技术VT (Visualization Technology)  虚拟化技术本质上来讲就是可以让一个CPU工作起来就像多个CPU并行运行，从而使得在一台电脑内可以同时运行多个操作系统，也就是常说的虚拟机(Visual Machine)。它的核心技术hypervisor也叫虚拟机监视器(V">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://gyn-58.github.io/2023/01/18/Docker/vm_container.jpg">
+<meta property="og:image" content="http://gyn-58.github.io/2023/01/18/Docker/docker-container.png">
+<meta property="og:image" content="http://gyn-58.github.io/2023/01/18/Docker/file.png">
+<meta property="og:image" content="http://gyn-58.github.io/2023/01/18/Docker/file2.png">
+<meta property="article:published_time" content="2023-01-18T03:12:05.000Z">
+<meta property="article:modified_time" content="2023-01-11T12:05:26.822Z">
+<meta property="article:author" content="Nong">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gyn-58.github.io/2023/01/18/Docker/vm_container.jpg">
+
+
+<title >Docker</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.png?v=1.1.1' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.png?v=1.1.1' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+    <link href='/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+
+
+    
+
+    
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"gyn-58.github.io","author":"Nong","root":"/","typed_text":["I am chasing the sun"],"favicon":{"logo":"/img/favicon.png","dark_logo":"/img/logo_dark.png","icon16":"/img/favicon.png","icon32":"/img/favicon.png","appleTouchIcon":null,"webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"/img/favicon.svg","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"theme_version":"1.1.1","theme":{"switch":true,"default":"style-dark"},"search":{"enable":false,"type":"engine","href":"https://www.google.com/search?q=site:","domain":null},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_button":"Copy","copy_success":"Copied","copy_failure":"Copy failed"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=1.1.1" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style=" position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				
+					<img alt="logo" class=" trm-light-icon" src="/img/favicon.png"> <img alt="logo" class=" trm-dark-icon" src="/img/logo_dark.png">
+				
+				
+					<div class="trm-logo-text">
+						YuNong<span>Guo</span>
+					</div>
+				
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/" target="">
+								Home
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/" target="">
+								Archives
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/" target="">
+								About
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+			
+			<!-- mode switcher place -->
+			
+			<div class="trm-mode-switcher-place">
+				<!-- <div class="trm-hidden-switcher"> -->
+					<div class="trm-mode-switcher">
+					  <i class="iconfont far fa-sun"></i>
+					  <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+					  <label class="trm-swich" for="trm-swich"></label>
+					  <i class="iconfont far fa-moon"></i>
+					</div>
+				  <!-- </div> -->
+			</div>
+			
+			<!-- mode switcher place end -->
+
+			 
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/Docker.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-12">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text trm-text-center ">
+                        <div class="trm-label trm-mb-20">
+                            
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Docker
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            01/18
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            11:12
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Nong
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article class="trm-publication">
+    <h1 id="Docker入门"><a href="#Docker入门" class="headerlink" title="Docker入门"></a>Docker入门</h1><h3 id="这篇文章主要介绍Docker的相关概念以及它的一些特点。"><a href="#这篇文章主要介绍Docker的相关概念以及它的一些特点。" class="headerlink" title="这篇文章主要介绍Docker的相关概念以及它的一些特点。"></a>这篇文章主要介绍Docker的相关概念以及它的一些特点。</h3><h3 id="1-Containers–容器"><a href="#1-Containers–容器" class="headerlink" title="1. Containers–容器"></a>1. Containers–容器</h3><ul>
+<li><p><strong>虚拟化技术VT (Visualization Technology)</strong></p>
+<ul>
+<li><p>虚拟化技术本质上来讲就是可以让一个CPU工作起来就像多个CPU并行运行，从而使得在一台电脑内可以同时运行多个操作系统，也就是常说的虚拟机(Visual Machine)。它的核心技术<strong>hypervisor</strong>也叫虚拟机监视器(Visual Machine Monitor，VMM)，是一种运行在基础物理服务器和操作系统之间的中间软件层，可以将一台或多台独立的机器虚拟运行于硬件之上，当服务器启动并执行hypervisor时，它会加载所有虚拟机客户端的操作系统同时分配给每一台虚拟机适量的内存，CPU，网络和磁盘。</p>
+</li>
+<li><p>用来运行这些虚拟操作系统的电脑叫主体机器(host machine)，而这些虚拟出来的操作系统叫客体操作系统(guest os)，hypervisor提供虚拟的作业平台来执行客体操作系统，这些客体操作系统，共同分享虚拟化后的硬件资源，如下图所示：</p>
+<p><img src="vm_container.jpg" alt="vm_container" loading="lazy"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>容器 (Containers)</strong></p>
+<ul>
+<li><p>容器与上面提到的管理程序虚拟化(Hypervisor Visualization，HV)有所不同，管理程序虚拟化通过hypervisor将一台或者多台独立的机器虚拟运行与物理硬件之上，而容器则是直接运行在操作系统内核之上的用户空间，因此容器虚拟化也被称为“操作系统级虚拟化”。</p>
+</li>
+<li><p>简单来说，容器是应用程序层的抽象，将代码和依赖项打包在一起。多个容器可以在同一台机器上运行，并与其他容器共享操作系统内核，每个容器都可以在用户空间中作为孤立的进程运行。容器占用的空间比虚拟机少很多（容器映像的大小通常为几十MB），可以处理更多的应用程序，并且需要更少的虚拟机和操作系统。</p>
+<p><img src="docker-container.png" alt="docker-container" loading="lazy"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Docker"><a href="#2-Docker" class="headerlink" title="2. Docker"></a>2. Docker</h3><ul>
+<li><p><strong>Docker的前身LXC (Linux Container)</strong><br>LXC被称作Linux容器，可以提供轻量级的虚拟化。它将Linux沙盒化，使得进程之间相互隔离，并且能对各进程资源合理分配，是Docker最初的底层核心。</p>
+<blockquote>
+<p>沙盒(sandbox)：一种安全机制，为运行中的程序提供的隔离环境，当程序来源未知或可能造成破坏时可以保证电脑的安全，也常用于对程序的测试。</p>
+</blockquote>
+</li>
+<li><p><strong>什么是Docker?</strong></p>
+<ul>
+<li><p>Docker是一个基于Go语言开发的应用容器引擎，在2013年作为开源容器引擎推出，可以说是为容器创建了行业标准。</p>
+</li>
+<li><p>Docker基于LXC的<strong>namspace</strong>，<strong>cgroup</strong>和<strong>Union FS</strong>三大技术开发：</p>
+<ul>
+<li><p>namespace（命名空间）可以隔离系统资源，把资源分配给不同的命名空间，不同命名空间内的进程互不干扰。当多个用户使用同一台Linux服务器时，每个用户只能访问自己所分配到的系统资源，但是总有一些操作需要有root权限，显然不可能给每一个用户root权限，这时候namespace可以解决这个问题，对该用户虚拟化一个namespace，在这个命名空间里面他拥有root权限，但在服务器层面该用户仍是普通用户。同样从进程的角度来说也是一样，在每一个命名空间内部，该用户的init进程编号pid总是为1，每一个用户都会觉得自己独占这个服务器，但从服务器角度来看，这些pid&#x3D;1的子进程只不过是父进程通过namespace映射出来的，在父进程内的pid可能为3，也可能为5。</p>
+</li>
+<li><p>cgroup（control group，控制组）可以对进程使用资源的总量进行限制，对进程的优先级进行分配，统计系统资源的使用量，并对进程挂起&#x2F;恢复。</p>
+</li>
+<li><p>Union FS（联合文件系统）是一种<strong>分层</strong>，轻量级，高性能的文件系统，是Doceker容器分层技术的基础。它使文件系统类似于洋葱一层一层的叠加，这也是为什么Docker镜像包含很多层，虽然外面看起来是一整个的系统。这种分层技术最大的好处就是可以资源共享，比如一台电脑上有很多基于Linux操作系统镜像的容器，通过Union FS只需要在磁盘上保留一份镜像就可以让所有容器共享。Docker的文件系统分为两层：bootfs和rootfs:</p>
+<ul>
+<li><p>bootfs (boot file system)：包含了bootloader和linux内核，用户不能对它做任何修改，启动完成后整个linux内核加载进内存，bootfs会被卸载掉。</p>
+</li>
+<li><p>rootfs (root file system)：系统根目录结构，与具体linux版本有关。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>  <img src="file.png" alt="file" loading="lazy">
+  </p>
+</li>
+<li><p>如上图所示，aufs (advanced multi layered unification filesystem)是一种可堆叠的文件系统，Docker可以在同一内核上运行不同版本的linux，这也是为什么安装linux虚拟机好几个G，而Docker镜像才几百M，其实安装的就是rootfs。</p>
+</li>
+<li><p>除此之外，Docker镜像具有写时拷贝(Copy-on-Write)技术，即某容器对镜像的修改会被限制在该容器内。上面提到Docker镜像采用分层系统，在构建时一层一层构建，前一层是后一层的基础，每一层构建完就不再发生改变，当启动容器后，Docker会在镜像顶部添加新的一层，这层是可写的，被称为容器层，这层任何的改变都不会影响下面的只读镜像层。</p>
+<p>  <img src="file2.png" alt="file2" loading="lazy"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Docker的特点</strong><br>  正如它logo所表示的那样，Docker借鉴了集装箱的概念，它就像鲸鱼，容器就是一个个的集装箱，里面装着各种各样的软件及其配置环境，Docker并不关心集装箱里面具体装着什么东西，所有东西都以相同的方式装载进去，它们可以被运到你想部署的任何地方。基于这种特点，以及上述同传统虚拟方式的对比，很显然它具有以下优势：</p>
+<ul>
+<li>更高效的利用系统资源。</li>
+<li>更快速的启动时间。</li>
+<li>一致的运行环境。</li>
+<li>持续交付和部署。</li>
+<li>更轻松的迁移，维护和拓展。</li>
+</ul>
+</li>
+</ul>
+
+</article>
+    
+    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/12/Github-Action/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/actions.png">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%9B%E4%BD%9C%E5%8C%BA/">
+                    创作区
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/12/Github-Action/" class="trm-anima-link">
+                    Github Actions (一)
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/02/12</li>
+                <li>19:51</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/01/06/HouseRental/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" src="/img/cover/2.jpg">
+            
+        </a>
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%B1%95%E7%A4%BA%E5%8C%BA/">
+                    展示区
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/01/06/HouseRental/" class="trm-anima-link">
+                    长租公寓平台
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/01/06</li>
+                <li>18:34</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+    
+    
+        <div class="trm-footer-item">
+            <span>© 2022- 2023</span>
+            <span class="footer-separator">·</span>
+            <span class="trm-accent-color">Nong</span>
+        </div>
+    
+    
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
+            </span>
+        </div>
+      
+    
+    
+        <div class="trm-footer-item">
+            The blog has been running for <span id="since" class="trm-accent-color"></span> days
+        </div>
+     
+    
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("05/08/2022 17:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  <div id="trm-back-top" class="trm-back-top">
+    <i class="iconfont fas fa-arrow-up"></i>
+</div>
+  
+  <!-- Plugin -->
+
+
+
+    
+    
+
+    
+<script src="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=1.1.1"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+
+    <!-- 评论插件 -->
+    
+        
+        
+    
+
+
+
+<!-- 评论插件 -->
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=1.1.1"></script>
+
+</body>
+
+</html>
